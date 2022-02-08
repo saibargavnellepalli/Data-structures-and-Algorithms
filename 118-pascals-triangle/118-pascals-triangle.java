@@ -28,18 +28,38 @@ class Solution {
 //     }
 // }
         
-     List<List<Integer>> main_list = new ArrayList<>();
+//      List<List<Integer>> main_list = new ArrayList<>();
 
-      for (int line=1;line<=n;line++){
-          List<Integer> dups_list = new ArrayList<>();
-          int c=1;
-          for (int i=1;i<=line;i++){
-              dups_list.add(c);
-              c=c*(line-i)/i;
-          }
-          main_list.add(dups_list);
-      }
-return main_list;
+//       for (int line=1;line<=n;line++){
+//           List<Integer> dups_list = new ArrayList<>();
+//           int c=1;
+//           for (int i=1;i<=line;i++){
+//               dups_list.add(c);
+//               c=c*(line-i)/i;
+//           }
+//           main_list.add(dups_list);
+//       }
+// return main_list;
+//     }
+// }
+           // private static  List<List<Integer>> pascal(int n) {
+        List<List<Integer>> main_list = new ArrayList<>();
+
+        for (int line = 0; line < n; line++) {
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i <= line; i++) {
+                if (i == 0 || line == i) {
+                    list.add(1);
+                } else {
+                    list.add(main_list.get(line - 1).get(i) + main_list.get(line - 1).get(i - 1));
+                }
+            }
+            main_list.add(list);
+
+        }
+        return main_list;
     }
 }
+
+    
 
