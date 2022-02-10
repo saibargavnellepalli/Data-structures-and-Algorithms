@@ -20,25 +20,34 @@ class Solution {
         
         
         //    private static int majorityElement(int[] arr) {
-     int n = arr.length;
-   int majority = n/2;
-   Arrays.sort(arr);
-   int i=0,j=0;
-   while (i<n && j<n){
-       if (arr[i]==arr[j]){
-           j++;
-       }
-       else {
-           if ((j-i)>majority){
-               return arr[i];
-           }
-           else {
-               i=j;
-           }
-       }
-   }
-   if (j==n) return arr[j-1];
-   return -1;
+      int n = arr.length;
+    int majority = n/2;
+   // Arrays.sort(arr);
+   // int i=0,j=0;
+   // while (i<n && j<n){
+   //     if (arr[i]==arr[j]){
+   //         j++;
+   //     }
+   //     else {
+   //         if ((j-i)>majority){
+   //             return arr[i];
+   //         }
+   //         else {
+   //             i=j;
+   //         }
+   //     }
+   // }
+   // if (j==n) return arr[j-1];
+   // return -1;
+        
+        //Moors voting algorithm
+        int cnt=0,elm=0;
+        for(int i=0;i<n;i++){
+            if(cnt == 0) elm = arr[i];
+            if(elm == arr[i]) cnt++;
+            else cnt--;
+        }
+        return elm;
     }
 }
 
