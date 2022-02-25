@@ -6,7 +6,7 @@ class Solution {
         if(n==1)return 1;
         int max=1,count=1;
         int elem = nums[0];
-        for(int i=1;i<n;i++){
+     /*   for(int i=1;i<n;i++){
            if(nums[i]==elem+1) {
                count++;
                elem++;
@@ -18,6 +18,25 @@ class Solution {
                 elem = nums[i];
             }
             
+        }
+        */
+        
+        //HashSet approach
+        HashSet<Integer> hash = new HashSet<>();
+        for(int i=0;i<n;i++){
+            hash.add(nums[i]);
+        }
+        
+        for(int i=0;i<n;i++){
+            if(hash.contains(nums[i]-1)==false){
+                count=1;
+                int temp = nums[i];
+                while(hash.contains(temp+1)){
+                    count++;
+                   temp++;
+                }
+                max = Math.max(count,max);
+            }
         }
         return max;
     }
