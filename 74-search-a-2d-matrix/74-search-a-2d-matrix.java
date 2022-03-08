@@ -14,7 +14,7 @@ class Solution {
 //         }
 //         return false;
 //     }
-        int start =0,end =matrix.length-1;
+      /*  int start =0,end =matrix.length-1;
         int n = matrix[0].length-1;
         int len = matrix[0].length-1;
         n =n/2;
@@ -56,6 +56,39 @@ class Solution {
                 if (matrix[mid][n]==target) return true;
             }
         }
+        return false;*/
+         int start =0,end =matrix.length-1;
+        int n = matrix[0].length-1;
+        int len = matrix[0].length-1;
+        n =n/2;
+
+        while (start<=end){
+            int mid = (start+end)/2;
+          
+            if (matrix[mid][0]<=target && matrix[mid][len]>=target) {
+                for (int i = 0; i < matrix[0].length; i++) {
+                    if (matrix[mid][i] == target) {
+                        
+                        return true; 
+                    }
+                }
+            }
+           
+            if (matrix[mid][n]>target){
+              
+                    end = mid-1;
+                
+            }
+            else if (matrix[mid][n]<target){
+                start= mid+1;
+                }
+            
+            else {
+                if (matrix[mid][n]==target) return true;
+            }
+        }
         return false;
     }
 }
+
+ 
