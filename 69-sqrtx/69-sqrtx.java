@@ -7,10 +7,10 @@ class Solution {
             if(mid<=x/mid && (mid+1)>x/(mid+1))
                 return mid;
             else if(mid>x/mid){
-                e = mid;
+                e = mid-1;
             }
             else {
-                s = mid;
+                s = mid+1;
             }
             
         }
