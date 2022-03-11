@@ -5,11 +5,11 @@ class Solution {
         
      int l=0,r=n-1;
         int temp = n/2;
-        while(i<n/2){
+        while(l<r){
             arr[l] = temp;
             arr[r] = temp-2*temp;
             temp--;
-            i++;
+           // i++;
             l++;
             r--;
         }
