@@ -3,20 +3,12 @@ class Solution {
         
         int n = nums.length;
         
-        if(n==1) return nums[0];
-        if(n==2) return nums[0];
-        
-        int i=0;
-        while(i<n-1){
-            if(nums[i]==nums[i+1]) i=i+2;
-            else return nums[i];
+    int ans =0;
+        for(int i=0;i<n;i++){
+            ans^=nums[i];
         }
         
-        if(nums[n-1]!=nums[n-2]){
-            return nums[n-1];
-        }
-        
-        return nums[0];
+        return ans;
         
     }
 }
