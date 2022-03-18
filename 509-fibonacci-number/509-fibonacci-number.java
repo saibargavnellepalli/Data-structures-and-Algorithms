@@ -1,10 +1,20 @@
 class Solution {
     public int fib(int n) {
-        if(n<=1) return n;
-        int decreaseByOne = fib(n-1);
-        int increaseByOne = fib(n-2);
-        
-        return decreaseByOne+increaseByOne;
-        
+        return fibo(n, new HashMap<Integer,Integer>());
     }
+        public int fibo(int n, HashMap<Integer,Integer> memo){
+        if(n<=1) return n;
+            
+            int currentKey = n;
+            if(memo.containsKey(currentKey))
+                return memo.get(currentKey);
+            
+        int decreaseByOne = fibo(n-1,memo);
+        int increaseByOne = fibo(n-2,memo);
+        
+            memo.put(currentKey,decreaseByOne+increaseByOne);
+        return decreaseByOne+increaseByOne;
+}
+        
+    
 }
