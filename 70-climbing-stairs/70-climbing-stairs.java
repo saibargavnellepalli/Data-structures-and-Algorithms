@@ -1,6 +1,6 @@
 class Solution {
     public int climbStairs(int n) {
-        return totalWays(0, n, new HashMap<Integer,Integer>());
+    return totalWays(0, n, new HashMap<Integer,Integer>());
     }
     public int totalWays(int currentStair, int  targetStair, HashMap<Integer,Integer> memo ){
         if(currentStair==targetStair) return 1;
@@ -16,7 +16,10 @@ class Solution {
         int twoJump = totalWays(currentStair+2, targetStair,memo );
           
         memo.put(currentStair,oneJump+twoJump);
-        return oneJump+twoJump;
+        return oneJump+twoJump; 
+        
+    
+        
         
     }
 }
