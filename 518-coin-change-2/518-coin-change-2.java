@@ -1,11 +1,20 @@
 class Solution {
     public int change(int amount, int[] coins) {
         
-        return totalWays(coins,0,amount,new HashMap<String,Integer>());
+        int[][] dp = new int[coins.length][amount+1];
+        
+        for(int i=0;i<coins.length;i++){
+            for(int j=0;j<amount+1;j++){
+                dp[i][j] =-1;
+            }
+        }
+        
+        
+        return totalWays(coins,0,amount,dp);
         
     }
     
-    public int totalWays( int[] coins,int currentIndex, int amount,HashMap<String,Integer> memo){
+    public int totalWays( int[] coins,int currentIndex, int amount,int[][] dp){
         
          //found 1 way
         if(amount == 0)
@@ -14,19 +23,18 @@ class Solution {
         if(currentIndex>=coins.length)
             return 0;
         
-     String currentKey = Integer.toString(currentIndex)+"-"+Integer.toString(amount);
-      
-        if(memo.containsKey(currentKey))
-            return memo.get(currentKey);
+    if(dp[currentIndex][amount]!=-1)
+        return dp[currentIndex][amount];
+        
         //consider
         int consider=0;
         if(coins[currentIndex]<=amount)
-         consider = totalWays(coins,currentIndex,amount-coins[currentIndex],memo);
+         consider = totalWays(coins,currentIndex,amount-coins[currentIndex],dp);
         
         //not consider
-        int notConsider = totalWays(coins,currentIndex+1,amount,memo);
+        int notConsider = totalWays(coins,currentIndex+1,amount,dp);
         
-        memo.put(currentKey,consider+notConsider);
+       dp[currentIndex][amount] = consider+notConsider;
         return consider+notConsider;
         
         
