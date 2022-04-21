@@ -38,6 +38,7 @@ class Solution {
         
         leafsOfTree(root.left,leaf);
        leafsOfTree(root.right,leaf);
+        return;
         
     }
 }
