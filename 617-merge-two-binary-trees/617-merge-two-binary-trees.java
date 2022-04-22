@@ -26,11 +26,11 @@ class Solution {
         if(root2 == null)
             return root1;
         
-        TreeNode temp = new TreeNode(root1.val+root2.val);
+      root2.val = root2.val+root1.val;
         
-        temp.left = merge(root1.left, root2.left);
-        temp.right = merge(root1.right, root2.right);
+        root2.left = merge(root1.left, root2.left);
+        root2.right = merge(root1.right, root2.right);
         
-        return temp;
+        return root2;
     }
 }
