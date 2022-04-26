@@ -20,23 +20,28 @@ class Node {
 class Solution {
     public List<Integer> preorder(Node root) {
         
-        ArrayList<Integer> al = new ArrayList<Integer>();
+        ArrayList<Integer> ans = new ArrayList<Integer>();
         
-        preOrderTraversal(root, al);
-        return al;
+        Stack<Node> stack = new Stack<>();
         
-    }
-    public void preOrderTraversal(Node root, ArrayList<Integer>al){
-        if(root == null)
-            return;
+           if(root==null)
+               return ans;
+         
+            stack.push(root);
         
-        al.add(root.val);
-        
-        List<Node> childrens = root.children;
-        
-        for(Node curr : childrens){
-            preOrderTraversal(curr, al);
+        while(!stack.isEmpty()){
+            
+           Node currNode = stack.peek();
+            
+            List<Node> child = currNode.children;
+            ans.add(currNode.val);
+            stack.pop();
+            
+            for(int i=child.size()-1; i>=0 ;i--){
+                stack.push(child.get(i));
+            }
         }
+        return ans;
         
     }
 }
