@@ -17,8 +17,6 @@ class Solution {
     public int maxDepth(TreeNode root) {
         
      
-        
-     List<List<Integer>> outerList = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
         
         if(root!=null)
@@ -26,18 +24,19 @@ class Solution {
         else
             return 0;
         
+        int height = 0;
         while(!q.isEmpty()){
             
             int x = 0;
-             List<Integer> Innerlist = new ArrayList<>();
+            height +=1;
             
             int n = q.size();
-           
+            
                 
                 while(x<n){
                 
                 TreeNode temp = q.peek();
-                Innerlist.add(temp.val);
+               
                 q.remove();
                 
                 if(temp.left!=null)
@@ -50,8 +49,8 @@ class Solution {
                 
             }
             
-            outerList.add(Innerlist);
+           
         }
-        return outerList.size();
+        return height;
     }
 }
