@@ -18,17 +18,40 @@ class Solution {
         
      
         
-       return depth(root,0);
-    }
-    
-    public int depth(TreeNode root, int currentDepth){
+     List<List<Integer>> outerList = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
         
-        if(root == null)
-            return currentDepth;
+        if(root!=null)
+            q.add(root);
+        else
+            return 0;
         
-        int left =  depth(root.left,currentDepth+1);
-        int right = depth(root.right, currentDepth+1);
-        return Math.max(left,right);
+        while(!q.isEmpty()){
+            
+            int x = 0;
+             List<Integer> Innerlist = new ArrayList<>();
+            
+            int n = q.size();
+           
+                
+                while(x<n){
+                
+                TreeNode temp = q.peek();
+                Innerlist.add(temp.val);
+                q.remove();
+                
+                if(temp.left!=null)
+                    q.add(temp.left);
+                
+                if(temp.right!=null)
+                    q.add(temp.right);
+                
+                x++;
+                
+            }
+            
+            outerList.add(Innerlist);
+        }
+        return outerList.size();
     }
-    
 }
