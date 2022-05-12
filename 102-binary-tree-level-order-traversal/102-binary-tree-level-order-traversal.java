@@ -30,9 +30,9 @@ class Solution {
              List<Integer> Innerlist = new ArrayList<>();
             
             int n = q.size();
-            while(x<n){
+           
                 
-               
+                while(x<n){
                 
                 TreeNode temp = q.peek();
                 Innerlist.add(temp.val);
