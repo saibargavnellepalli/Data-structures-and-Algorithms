@@ -16,49 +16,53 @@
 class Solution {
     public boolean isCousins(TreeNode root, int x, int y) {
         
-        if(root.val == x || root.val == y)
-            return false;
+       Queue<TreeNode> q = new LinkedList<>();
         
-      ArrayList<Integer> list = new ArrayList<Integer>();
+        int level = 0, lvl1=-1 , lvl2 = -1;
         
+        Integer p1 = -1, p2 = -1;
         
-        cousin(root,x,y,1,list);
+        if(root != null)
+            q.add(root);
         
-        if(list.size()<4){
-            return false;
+        while(!q.isEmpty()){
+            
+            level+=1;
+            int n = q.size();
+            int i =0;
+            
+            while(i<n){
+                
+                TreeNode temp = q.poll();
+                
+                
+                if( (temp.left != null && temp.left.val == x) || (temp.right!=null  && temp.right.val == x)){
+                    
+                    p1 = temp.val;
+                    lvl1 = level;
+                }
+                
+                      if( (temp.left != null && temp.left.val == y) || (temp.right!=null  && temp.right.val == y)){
+                    
+                    p2 = temp.val;
+                    lvl2 = level;
+                }
+                
+                if(temp.left!=null)
+                    q.add(temp.left);
+                
+                if(temp.right != null)
+                    q.add(temp.right);
+                
+                i+=1;
+            }
+            
+            if(p1 != -1 && p2 != -1){
+                if(p1!=p2 && lvl1 == lvl2)
+                    return true;
+            }
         }
-        
-        if(list.get(0)==list.get(2) && list.get(1)!=list.get(3))
-            return true;
         
         return false;
-        
-    }
-    
-    public void cousin(TreeNode root, int x, int y,   int count, ArrayList<Integer> list){
-        
-        if(root == null)
-            return;
-        
-        if(root.left !=null){
-        if(root.left.val == x || root.left.val == y ){
-            list.add(count);
-            list.add(root.val);
-            return;
-        }
-        }
-        
-        if(root.right!=null){
-        if(root.right.val == x || root.right.val == y) {
-             list.add(count);
-             list.add(root.val);
-            return;
-        }
-        }
-        
-        
-         cousin(root.left,x,y,count+1,list);
-         cousin(root.right,x,y,count+1,list);
-        return;
     }
 }
