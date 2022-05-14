@@ -14,13 +14,28 @@
  * }
  */
 class Solution {
+    
+    
+    
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         
         int[] preorderIndex = {0};
-        return constructTree(preorder, inorder,preorderIndex,0, inorder.length-1);
+        HashMap<Integer,Integer> inorderMap = buildMap(inorder);
+        
+        return constructTree(preorder, inorder,preorderIndex,0, inorder.length-1,inorderMap);
     }
     
-    private TreeNode constructTree(int[] preorder, int[] inorder, int[] preorderIndex,int inStart, int inEnd){
+    private HashMap<Integer,Integer> buildMap(int[] inorder){
+        
+          HashMap<Integer,Integer>  hash = new HashMap<>();
+        
+        for(int i=0;i<inorder.length;i++){
+            hash.put(inorder[i],i);
+        }
+        
+        return hash;
+    }
+    private TreeNode constructTree(int[] preorder, int[] inorder, int[] preorderIndex,int inStart, int inEnd,  HashMap<Integer,Integer> inorderMap ){
         
         if( preorderIndex[0] >= inorder.length || inStart > inEnd ){
             return null;
@@ -32,17 +47,11 @@ class Solution {
         
         preorderIndex[0]+=1;
         
-        int i = -1;
-        
-        for(i = inStart; i<=inEnd; i++){
-            
-            if(inorder[i] == currVal)
-                break;
-        }
+       int i = inorderMap.get(currVal);
         
         
-          currNode.left = constructTree(preorder, inorder, preorderIndex, inStart, i-1);
-         currNode.right  = constructTree(preorder, inorder, preorderIndex, i+1, inEnd);
+          currNode.left = constructTree(preorder, inorder, preorderIndex, inStart, i-1,  inorderMap );
+         currNode.right  = constructTree(preorder, inorder, preorderIndex, i+1, inEnd, inorderMap );
         
         return currNode;
         
