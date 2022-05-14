@@ -8,14 +8,7 @@
  * }
  */
 
-class pair{
-    TreeNode node;
-    int x;
-    pair(TreeNode node, int x){
-        this.node = node;
-        this.x = x;
-    }
-}
+
 class Solution {
     
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
@@ -54,41 +47,43 @@ class Solution {
     
     private List<Integer> findNodes(TreeNode target,int k, HashMap<TreeNode,TreeNode> parentsMap){
         
-        Queue<pair> q = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
         Set<TreeNode>   seen = new HashSet<>();
          List<Integer> ans = new ArrayList<>();
         
-        
-        
-        q.add(new pair(target,k));
+        int level =-1;
+        q.add(target);
         
         while(!q.isEmpty()){
+           
+            level+= 1;
             
-            pair temp = q.poll();
-            TreeNode currentNode = temp.node;
-             k = temp.x;
+            int n = q.size();
             
-            if(seen.contains(currentNode))
-                continue;
+            for (int i=0;i<n;i++){
+                TreeNode temp = q.poll();
+                
+                if(seen.contains(temp))
+                    continue;
+                
+              if(level == k)
+                    ans.add(temp.val);
+                
+                if(temp.left != null)
+                    q.add(temp.left);
+                
+                if(temp.right != null)
+                    q.add(temp.right);
+                
+               if(parentsMap.get(temp) != null)
+                   q.add(parentsMap.get(temp));
+                   
+                seen.add(temp);
+                   }   
+        
             
-            if(k == 0){
-                ans.add(currentNode.val);
-                continue;
-            }
-            
-            if(currentNode.left != null)
-                q.add(new pair(currentNode.left,k-1));
-            
-            if(currentNode.right != null)
-                q.add(new pair(currentNode.right, k-1));
-            
-            if(parentsMap.get(currentNode) != null)
-                q.add(new pair(parentsMap.get(currentNode), k-1));
-            
-            seen.add(currentNode);
-            
-            
-        }
+                   } 
+        
         return ans;
     }
 }
