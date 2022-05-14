@@ -7,73 +7,88 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+class pair{
+    TreeNode node;
+    int x;
+    pair(TreeNode node, int x){
+        this.node = node;
+        this.x = x;
+    }
+}
 class Solution {
     
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+     
+        //Finding parents
+        HashMap<TreeNode,TreeNode> parentsMap = new HashMap<>();
         
-        // 1) find parents
-        HashMap<TreeNode,TreeNode> parentStore = new HashMap<>();
-        parent(root,null,parentStore);
+        findParents(root,parentsMap);
         
-        ArrayList<Integer> ans = new ArrayList<Integer>();
-        //2) finding target
-        findTarget(root,false,target,parentStore,ans,k);
+       return findNodes(target,k, parentsMap);
+    }
+    
+    private void findParents(TreeNode root,  HashMap<TreeNode,TreeNode> parentsMap ){
         
+        Queue<TreeNode> q = new LinkedList<>();
+        
+        if(root!=null)
+            q.add(root);
+        
+        while(!q.isEmpty()){
+            
+            TreeNode temp = q.poll();
+            
+            if(temp.left!=null){
+                parentsMap.put(temp.left,temp);
+                q.add(temp.left);
+            }
+            
+            if(temp.right!=null){
+                parentsMap.put(temp.right,temp);
+                q.add(temp.right);
+            }
+            
+        }
+    }
+    
+    private List<Integer> findNodes(TreeNode target,int k, HashMap<TreeNode,TreeNode> parentsMap){
+        
+        Queue<pair> q = new LinkedList<>();
+        Set<TreeNode>   seen = new HashSet<>();
+         List<Integer> ans = new ArrayList<>();
+        
+        
+        
+        q.add(new pair(target,k));
+        
+        while(!q.isEmpty()){
+            
+            pair temp = q.poll();
+            TreeNode currentNode = temp.node;
+             k = temp.x;
+            
+            if(seen.contains(currentNode))
+                continue;
+            
+            if(k == 0){
+                ans.add(currentNode.val);
+                continue;
+            }
+            
+            if(currentNode.left != null)
+                q.add(new pair(currentNode.left,k-1));
+            
+            if(currentNode.right != null)
+                q.add(new pair(currentNode.right, k-1));
+            
+            if(parentsMap.get(currentNode) != null)
+                q.add(new pair(parentsMap.get(currentNode), k-1));
+            
+            seen.add(currentNode);
+            
+            
+        }
         return ans;
     }
-    
-    private void parent(TreeNode currentNode, TreeNode parentNode,  HashMap<TreeNode,TreeNode> parentStore ){
-        
-        if(currentNode==null)
-            return;
-        parentStore.put(currentNode,parentNode);
-        
-        parent(currentNode.left,currentNode,parentStore);
-        parent(currentNode.right,currentNode,parentStore);
-        return;
-    }
-    
-    private void findTarget(TreeNode root, boolean flag,TreeNode target, HashMap<TreeNode,TreeNode> parentStore,ArrayList<Integer>ans,int k){
-        
-        if(root == null)
-            return;
-        
-        if(root == target){
-             Set<Integer> set = new HashSet<Integer>();
-            distanceKNode(root,k,parentStore,set,ans);
-                flag = true;
-            return;
-        }
-        if(!flag){
-        findTarget(root.left, flag,target,parentStore,ans,k);
-        findTarget(root.right, flag,target,parentStore,ans,k);
-        }
-        return;
-    }
-    //3) finding nodes of distance k
-    
-    private void distanceKNode(TreeNode root, int target,HashMap<TreeNode,TreeNode> parentStore,Set<Integer> visited,ArrayList<Integer>ans){
-        
-        if(root==null)
-            return;
-        
-        if(visited.contains(root.val))
-            return;
-        
-        if(target==0)
-        {
-            ans.add(root.val);
-        }
-        
-     visited.add(root.val);
-        
-        distanceKNode(root.left,target-1,parentStore,visited,ans);                                  
-        distanceKNode(root.right,target-1,parentStore,visited,ans);
-        distanceKNode(parentStore.get(root),target-1,parentStore,visited,ans);
-        
-        return;
-        
-    }
-    
-    
 }
