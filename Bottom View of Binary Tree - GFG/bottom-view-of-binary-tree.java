@@ -119,45 +119,60 @@ class GfG {
 
 
 
-class Solution
-{
-    //Function to return a list containing the bottom view of the given tree.
-    // using BFS, Level order , a queue, and map .
-    
-    public ArrayList <Integer> bottomView(Node root)
-    {
-        // Code here
-        ArrayList<Integer> res = new ArrayList<>();
-        Map<Integer, Integer> map = new TreeMap<>();
-        Queue<pair> q = new LinkedList<>();
-        
-        if(root == null ) return res;
-        
-        q.offer(new pair(0, root));
-        while( !q.isEmpty()){
-            pair next = q.remove();
-            int column = next.key;
-            Node temp = next.node;
-            
-            map.put(column, temp.data); // either update node value or put new.
-            
-            if(temp.left != null) q.add(new pair(column-1, temp.left) );
-            if(temp.right != null) q.add(new pair(column+1, temp.right) );
-        }
-        
-        for(Map.Entry<Integer, Integer> entry : map.entrySet() ){
-            res.add(entry.getValue() );
-        }
-        
-        return res;
-    }
-}
-class pair{
-        int key;
-        Node node;
-        pair(int k, Node n){
-            key = k;  node = n;
+
+class Pair{
+        Node p;
+        int d;
+        Pair(Node p, int d){
+            this.p = p;
+            this.d = d;
         }
 }
 
-    
+class Solution
+{
+   
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    static ArrayList<Integer> bottomView(Node root)
+    {
+        // add your code
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        Queue<Pair> queue = new LinkedList<>();
+        HashMap<Integer,Integer> memo = new HashMap<>();
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        
+      
+        queue.add(new Pair(root, 0));
+        //bfs
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            
+            for(int i=0; i<size; i++){
+                Pair currentPair = queue.remove();
+                Node currentNode  = currentPair.p;
+                int hd = currentPair.d;
+                
+               
+                    memo.put(hd, currentNode.data);
+                    min = Math.min(min, hd);
+                    max = Math.max(max, hd);
+                
+                
+                if(currentNode.left != null)
+                     queue.add(new Pair( currentNode.left,hd-1));
+                     
+                if(currentNode.right != null)
+                       queue.add(new Pair( currentNode.right,hd+1));
+                
+            }
+        }
+        
+        for(int i=min; i<=max; i++){
+            ans.add(memo.get(i));
+        }
+        return ans;
+        
+    }
+}
