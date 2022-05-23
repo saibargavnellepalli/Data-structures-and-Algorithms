@@ -123,102 +123,59 @@ class Node{
 }
 */
 
-/*class Solution
+ class Pair{
+        Node p;
+        int d;
+        Pair(Node p, int d){
+            this.p = p;
+            this.d = d;
+        }
+}
+
+class Solution
 {
+   
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
     static ArrayList<Integer> topView(Node root)
     {
         // add your code
         
-        //Collections.reverse(arrayli);
-        HashMap<Integer,Integer> hash = new HashMap<>();
-        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        Queue<Pair> queue = new LinkedList<>();
+        HashMap<Integer,Integer> memo = new HashMap<>();
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
         
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
-        int minMax[] = new int[2];
-        
-        top(root,0,hash, minMax);
-        
-         min = minMax[0];
-         max = minMax[1];
-         
-        // System.out.print(min+" "+max);
-         for(int i=min;i<=max;i++){
-            list.add(hash.get(i)); 
-         }
-         
-        
-     return list;   
-    }
-    
-    public static void top(Node root, int cl, HashMap<Integer,Integer> hash, int[] arr){
-     
-     if(root == null)
-            return;
-    
-    
-       
-      if(!hash.containsKey(cl)){
-          hash.put(cl,root.data);
-          if(cl<arr[0])
-        arr[0] = cl;
-    
-    if(cl>arr[1])
-       arr[1] = cl;
-      }
       
-      top(root.left,cl-1,hash,arr);
-      top(root.right,cl+1,hash,arr);
-      
+        queue.add(new Pair(root, 0));
+        //bfs
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            
+            for(int i=0; i<size; i++){
+                Pair currentPair = queue.remove();
+                Node currentNode  = currentPair.p;
+                int hd = currentPair.d;
+                
+                if(!memo.containsKey(hd)){
+                    memo.put(hd, currentNode.data);
+                    min = Math.min(min, hd);
+                    max = Math.max(max, hd);
+                }
+                
+                if(currentNode.left != null)
+                     queue.add(new Pair( currentNode.left,hd-1));
+                     
+                if(currentNode.right != null)
+                       queue.add(new Pair( currentNode.right,hd+1));
+                
+            }
+        }
+        
+        for(int i=min; i<=max; i++){
+            ans.add(memo.get(i));
+        }
+        return ans;
         
     }
 }
-*/
-
-class Solution
-{
-   
-   static ArrayList<Integer> topView(Node root)
-   {
-     ArrayList<Integer> list=new ArrayList<Integer>();
-       if(root==null) return list;
-       Queue<Pair> q=new LinkedList<Pair>();
-        Map<Integer,Integer> m= new TreeMap<Integer,Integer>();
-       q.add(new Pair(0,root));
-       m.put(0,root.data);
-       
-       while(!q.isEmpty())
-       {
-              Pair c=q.poll();
-            if(!m.containsKey(c.hd))  m.put(c.hd,c.node.data);
-               if(c.node.left!=null)
-               {
-                    q.add(new Pair(c.hd-1,c.node.left));
-                  
-               }
-                if(c.node.right!=null) 
-                {
-                      q.add(new Pair(c.hd+1,c.node.right));
-                }
-           }
-            for(Map.Entry<Integer,Integer> e:m.entrySet())
-              list.add(e.getValue());
-              
-         return list;
-       }
-  
-
-   }
-       
-class Pair
-   {
-       int hd;
-       Node node;
-       public Pair(int h,Node n)
-       {
-           hd=h;
-           node=n;
-       }
-   }
