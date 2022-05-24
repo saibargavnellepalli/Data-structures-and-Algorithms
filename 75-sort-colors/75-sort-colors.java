@@ -2,22 +2,31 @@ class Solution {
       public static void sortColors(int[] arr) {
 
           int n = arr.length;
-          //bubble sort
-          for(int i=0;i<n;i++){
-                boolean flag = false;
-              for(int j=0; j<n-1; j++){
-            
-                  if(arr[j]>arr[j+1]){
-                      int temp = arr[j];
-                      arr[j] = arr[j+1];
-                      arr[j+1] = temp;
-                      flag = true;
-                  }
-                 }
-               if(!flag)
-                      return;
+          //dutch national flag algo
+          
+          int start=0, end = n-1, mid = 0;
+          
+          while(mid<=end){
+              
+              if(arr[mid] == 2){
+                arr[mid] = arr[end];
+                  arr[end] = 2;
+                  end-=1;
+              }
+              
+              else if(arr[mid] == 1){
+                 
+                  mid+=1;
+              }
+              else if(arr[mid] == 0){
+                int temp = arr[start];
+                  arr[start] = arr[mid];
+                  arr[mid] = temp;
+                  start+=1;
+                  mid+=1;
+              }
+              
           }
-
     }
 
 
