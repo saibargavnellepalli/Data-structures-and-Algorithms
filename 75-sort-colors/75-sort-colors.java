@@ -1,24 +1,21 @@
 class Solution {
       public static void sortColors(int[] arr) {
-    int n = arr.length;
-          int s=0,mid=0,e=n-1;
-          while(mid<=e){
-              if(arr[mid]==0){
-                int temp = arr[mid];
-                  arr[mid] = arr[s];
-                  arr[s]= temp ;
-                  s++;
-                  mid++;
-              }
-              else if (arr[mid]==1){
-                  mid++;
-              }
-              else{
-                   int temp = arr[mid];
-                  arr[mid] = arr[e];
-                  arr[e]= temp ;
-                      e--;
-              }
+
+          int n = arr.length;
+          //bubble sort
+          for(int i=0;i<n;i++){
+                boolean flag = false;
+              for(int j=0; j<n-1; j++){
+            
+                  if(arr[j]>arr[j+1]){
+                      int temp = arr[j];
+                      arr[j] = arr[j+1];
+                      arr[j+1] = temp;
+                      flag = true;
+                  }
+                 }
+               if(!flag)
+                      return;
           }
 
     }
