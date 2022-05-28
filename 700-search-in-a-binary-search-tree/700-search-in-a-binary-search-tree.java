@@ -16,16 +16,17 @@
 class Solution {
     public TreeNode searchBST(TreeNode root, int key) {
             
-        if(root == null)
-            return null;
+       TreeNode CurrentPointer = root;
         
-        if(root.val == key)
-            return root;
-        if(key < root.val)
-            return searchBST(root.left,key);
-        else if(key > root.val)
-           return searchBST(root.right,key);
-        
-        return root;
+        while (CurrentPointer != null){
+            
+            if(CurrentPointer.val == key)
+                return CurrentPointer;
+            if(CurrentPointer.val > key)
+                CurrentPointer = CurrentPointer.left;
+            else if(CurrentPointer.val < key )
+                CurrentPointer = CurrentPointer.right;
+        }
+        return null;
         }
     }
