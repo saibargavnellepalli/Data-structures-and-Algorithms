@@ -122,43 +122,53 @@ class Node{
     }
 }*/
 
-
-
 class Tree
-{ 
-   
-   static int maxDiag;
-   
-   public void diagonal(Node node , int diag , HashMap<Integer,ArrayList<Integer>> hm){
-       if(node == null){
-           return;
-       }
-       if(diag >maxDiag){
-           maxDiag = diag;
-       }
-       if(hm.containsKey(diag)==false){
-           hm.put(diag , new ArrayList<>() );
-       }
-       hm.get(diag).add(node.data);
-       diagonal(node.left,diag+1,hm);
-       diagonal(node.right,diag,hm);
-   }
-   
-   
-    public ArrayList<Integer> diagonal(Node root)
-     {  
-         ArrayList <Integer> al = new ArrayList<>( );
-         HashMap<Integer,ArrayList<Integer>> hm =new HashMap<>();
-         diagonal(root,0,hm);
-         for(int i = 0; i <= maxDiag ; i++){
-             ArrayList<Integer> list =  hm.get(i) ;
-             if(list != null){ 
-             for(int j : list){
-                  
-                 al.add(j);
-               } 
+{
+     public ArrayList<Integer> diagonal(Node root)
+      {
+           //add your code here.
+           LinkedHashMap<Integer,ArrayList<Integer>> memo = new LinkedHashMap<>();
+           
+           ArrayList<Integer> ans = new ArrayList<Integer>();
+           
+       
+           
+           int max = Integer.MIN_VALUE;
+           
+          int[] arr = new int[1];
+             diagonalView(root,0,memo,arr);
+             
+             for(int i=0;i<=arr[0];i++){
+                ArrayList<Integer> currentAns = memo.get(i);
+                
+                for(int elm : currentAns){
+                    ans.add(elm);
+                }
              }
-         }
-         return al;
-     }
+             return ans;
+      }
+             
+             private void diagonalView(Node root, int slope, LinkedHashMap<Integer,ArrayList<Integer>> memo,int maxSlope[]){
+                 
+               if(root == null)
+                      return;
+               
+               maxSlope[0] = Math.max(slope,maxSlope[0]);
+               
+                if(memo.containsKey(slope)){
+                    memo.get(slope).add(root.data);
+                }
+                else{
+                    ArrayList<Integer> t = new ArrayList<Integer>();
+                    t.add(root.data);
+                    memo.put(slope,t);
+                }
+                
+               
+                    diagonalView(root.left, slope+1, memo,maxSlope);
+                    
+                    diagonalView(root.right, slope, memo,maxSlope);    
+                    
+            }
+      
 }
