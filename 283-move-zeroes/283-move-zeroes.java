@@ -1,29 +1,18 @@
 class Solution {
     public void moveZeroes(int[] arr) {
-          int k = 0;
-    while (k < arr.length) {
-      if (arr[k] == 0) {
-
-        break;
-      } else {
-        k = k + 1;
-      }
-    }
-
-    //finding zeros and immediate non-zero elements and swapping them
-    int i = k, j = k + 1;
-
-    while (i < arr.length && j < arr.length) {
-      if (arr[j] != 0) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-        i++;
-
-      }
-
-      j++;
-
-    }
+        int i=0, j=0, n=arr.length;
+        
+        while(j < n){
+            if(arr[j] != 0){
+                arr[i] = arr[j];
+                i++;
+            }
+            j++;
+        }
+        
+        while(i < n){
+            arr[i++] = 0;
+            
+        }
     }
 }
