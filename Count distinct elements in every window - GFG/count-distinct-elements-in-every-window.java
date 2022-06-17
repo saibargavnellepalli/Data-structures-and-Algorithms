@@ -36,26 +36,33 @@ class Solution
         // code here 
         ArrayList<Integer> ans = new ArrayList<>();
         Map<Integer,Integer> map = new HashMap<>();
-        
+        int count =0;
         for(int i=0;i<k;i++){
             if(map.containsKey(arr[i]))
              map.put(arr[i],map.get(arr[i])+1);
-             else
+             else{
+                 count+=1;
              map.put(arr[i],1);
+             }
         }
           
-        ans.add(map.size());
-        
+        ans.add(count);
+           
         for(int i=k;i<n;i++){
-             
-            map.put(arr[i-k],map.get(arr[i-k])-1);
-            if(map.get(arr[i-k])==0)
+        
+             map.put(arr[i-k],map.get(arr[i-k])-1);
+                   if(map.get(arr[i-k])==0){
+                  count -=1;
+           
             map.remove(arr[i-k]);
+                   }
                if(map.containsKey(arr[i]))
            map.put(arr[i],map.get(arr[i])+1);
-             else
+             else{
+                 count+=1;
              map.put(arr[i],1);
-          ans.add(map.size());
+             }
+          ans.add(count);
         }
         
         return ans;
