@@ -21,38 +21,11 @@ class Solution {
        */
 
         //Xor Method
+       int sum1 = 0;
+        for(int n:arr)
+            sum1+=n;
         int n = arr.length;
-        int xor1=arr[0];
-        for (int i=1;i<n;i++){
-            xor1^=arr[i];
-        }
-
-        for (int i=1;i<=n;i++){
-            xor1^=i;
-        }
-
-
-        int set_bit = xor1 & ~(xor1-1);
-
-        int x=0;
-        int y=0;
-        for (int i=0;i<n;i++) {
-            if ((arr[i] & set_bit) == 0) {
-                x ^= arr[i];
-            } else {
-                y ^= arr[i];
-            }
-        }
-
-            for (int i=1;i<=n;i++){
-                if ((i&set_bit)==0){
-                    x^=i;
-                }
-                else {
-                    y^=i;
-                }
-
-        }
-       return y;
+        int sum2 = (n*(n+1))/2;
+        return sum2-sum1;
     }
 }
