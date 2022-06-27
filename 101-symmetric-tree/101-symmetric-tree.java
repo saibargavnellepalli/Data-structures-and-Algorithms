@@ -16,35 +16,21 @@
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         
-        boolean bool[] = new boolean[1];
-         bool[0] = true;
-        symmetric(root,root,bool);
-        return bool[0];
-        
+        boolean arr[] = {true};
+        isMirror(root,root,arr);
+        return arr[0];
     }
-    
-    public void symmetric(TreeNode root1,TreeNode root2, boolean[] bool){
-        
-        if(root1 == null && root2 != null ){
-            bool[0] = false;
+    public void isMirror(TreeNode root1, TreeNode root2,boolean[] arr){
+        if(root1==null && root2==null)
+            return;
+        if(root1==null || root2==null || root1.val!=root2.val){
+            arr[0]=false;
             return;
         }
+        isMirror(root1.left,root2.right,arr);
+        isMirror(root1.right,root2.left,arr);
+        return;
         
-         if(root2 == null && root1 != null ){
-            bool[0] = false;
-            return;
-        }
-        
-        if(root1 == null || root2 == null)
-            return;
-   
-        if(root1.val!=root2.val){
-            bool[0] = false;
-            return;
-        }
       
-        symmetric(root1.left,root2.right,bool);
-        symmetric(root1.right,root2.left,bool);
-        
     }
 }
