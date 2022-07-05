@@ -10,41 +10,22 @@
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
-        boolean[] found = {false, false};
-  
-     TreeNode ans =   lca(root,p,q,found);
-        
-        return found[0] == true && found[1] == true ? ans : null;
+        return f(root,p,q);
     }
-    
-    private TreeNode lca(TreeNode root, TreeNode p, TreeNode q,  boolean[] found ){
-    
-        if(root == null)
-              return null;
-        
-        TreeNode left = lca(root.left, p,q,found);
-        TreeNode right = lca(root.right, p,q,found);
-        
-          
-    
-          if(root == p){
-              found[0] = true;
+    private TreeNode f(TreeNode root, TreeNode p, TreeNode q){
+        if(root==null)
+            return null;
+        if(root.val==p.val || root.val == q.val)
             return root;
-          }
         
-         if(root == q){
-              found[1] = true;
-            return root;
-          }
+        TreeNode left = f(root.left,p,q);
+        TreeNode right = f(root.right,p,q);
         
         if(left == null)
             return right;
-        
-        
         if(right == null)
             return left;
+        return root;
         
-        
-            return root;
     }
 }
