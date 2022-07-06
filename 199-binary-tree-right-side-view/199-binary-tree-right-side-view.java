@@ -16,51 +16,38 @@
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         
-       /* ArrayList<Integer> list = new ArrayList<Integer>();
-        
-        if(root!=null)
-            list.add(root.val);
-        
-        helper(root,list);
-        return list;
-    }
-    public void helper(TreeNode root,ArrayList<Integer> list){
-        
-        if (root == null)
-            return;
-        if(root.right == null && root.left==null)
-            return;
-        if(root.right == null && root.left!=null)
-            list.add(root.left.val);
-        
-         if(root.right != null)
-            list.add(root.right.val);
-        helper(root.right,list);
-        return;
-        */
+
         
     ArrayList<Integer> list = new ArrayList<Integer>();
+   
+    Queue<TreeNode> q = new LinkedList<>();
         
-        rightView(root, 1, list);
-       return list;
-    }
-    
-    public void rightView(TreeNode root, int cl,  ArrayList<Integer> list){
-        
-        if(root == null){
-            return;
+        if(root!=null){
+            q.add(root);
+                 list.add(root.val);
         }
         
-        
-        
-        //right view in left subtree
-        if(cl> list.size()){
-            list.add(root.val);
+        //perform BFS
+        while(!q.isEmpty()){
+             int n = q.size();
+             int elm = 0;
+            //process each level
+            for(int i=0;i<n;i++){
+                TreeNode t = q.remove();
+                if(t.left!=null){
+                    q.add(t.left);
+                    elm = t.left.val;
+                }
+                if(t.right!=null){
+                    q.add(t.right);
+                    elm = t.right.val;
+                }
+            }
+            if(elm!=0)
+            list.add(elm);
         }
         
-        rightView(root.right, cl+1, list);
-        rightView(root.left, cl+1, list);
-        
+        return list;
         
     }
 }
