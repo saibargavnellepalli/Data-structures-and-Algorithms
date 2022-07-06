@@ -19,35 +19,21 @@ class Solution {
 
         
     ArrayList<Integer> list = new ArrayList<Integer>();
-   
-    Queue<TreeNode> q = new LinkedList<>();
-        
-        if(root!=null){
-            q.add(root);
-                 list.add(root.val);
-        }
-        
-        //perform BFS
-        while(!q.isEmpty()){
-             int n = q.size();
-             int elm = 0;
-            //process each level
-            for(int i=0;i<n;i++){
-                TreeNode t = q.remove();
-                if(t.left!=null){
-                    q.add(t.left);
-                    elm = t.left.val;
-                }
-                if(t.right!=null){
-                    q.add(t.right);
-                    elm = t.right.val;
-                }
-            }
-            if(elm!=0)
-            list.add(elm);
-        }
-        
+     rightView(root,0,list);
         return list;
+        
+    }
+     public void rightView(TreeNode root, int cl,  ArrayList<Integer> list){
+        
+       if(root==null) return ;
+         
+         if(cl>=list.size())
+         list.add(root.val);
+         rightView(root.right,cl+1,list);
+         rightView(root.left,cl+1,list);
+
+         
+         
         
     }
 }
