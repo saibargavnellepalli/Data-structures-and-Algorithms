@@ -22,48 +22,17 @@ class Node {
 */
 
 class Solution {
-    public Node connect(Node root) {
-             
-     
-        Queue<Node> q = new LinkedList<>();
-        
-        if(root!=null)
-            q.add(root);
-       
-        
-        while(!q.isEmpty()){
-            
-            int x = 0;
-           
-            int n = q.size();
-           
-                
-                while(x<n){
-                
-                Node temp = q.poll();
-               
-                    if( x == n-1)
-                        temp.next = null;
-                    
-                    else 
-                        temp.next = q.peek(); 
-                        
-                
-                  if(temp.left!=null)
-                    q.add(temp.left);
-                
-                if(temp.right!=null)
-                    q.add(temp.right);
-                
-              
-           
-                      x++;
-                
-            
-            
-        }
-      
+      public Node connect(Node root) {
+      if(root == null) return root;    
+      helper(root.left, root.right);
+      return root;
     }
-          return root;
-}
+    
+    void helper(Node node1, Node node2){
+      if(node1 == null) return;    
+      node1.next = node2;
+      helper(node1.left, node1.right);
+      helper(node2.left, node2.right);
+      helper(node1.right, node2.left);
+    }
 }
