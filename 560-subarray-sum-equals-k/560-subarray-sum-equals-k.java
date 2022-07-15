@@ -1,30 +1,29 @@
 class Solution {
-    public int subarraySum(int[] arr, int k) {
-        int count=0,n=arr.length;
-        // for(int i=0;i<n;i++){
-        //    int ans =0;
-        //     for(int j=i;j<n;j++){
-        //         ans+=nums[j];
-        //         if(ans == k){
-        //             c++;
-        //            // break;
-        //         }
-        //     }
-        // }
-        // return c;
-      
-        int curr=0;
-        HashMap<Integer,Integer> hash = new HashMap<>();
+    public int subarraySum(int[] nums, int k) {
+        int answer = 0;
+        int prefixSum = 0;
         
-        for(int i=0;i<n;i++){
-            curr+=arr[i];
-            if(curr==k) count++;
-            if(hash.containsKey(curr-k)){
-                count+=hash.get(curr-k);
+       HashMap<Integer,Integer> map = new HashMap<>();
+       map.put(prefixSum,1);
+        
+        for(int currentVal : nums){
+            prefixSum+=currentVal;
+            
+            if(map.containsKey(prefixSum-k)){
+                answer += map.get(prefixSum-k);
+               
             }
-            if(hash.get(curr)==null) hash.put(curr,1);
-            else hash.put(curr,hash.get(curr)+1);
+            
+            if(map.containsKey(prefixSum)){
+                 map.put(prefixSum,map.get(prefixSum)+1);
+            }
+            else{
+                map.put(prefixSum,1);
+            }
+            
         }
-        return count;
+        
+        return answer;
+        
     }
 }
