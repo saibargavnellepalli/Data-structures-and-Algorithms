@@ -1,23 +1,23 @@
 class Solution {
     public int uniquePaths(int m, int n) {
         
-        return f(0,0,m,n, new HashMap<String,Integer>());
+        Integer[][] dp = new Integer[m][n];
+        return f(0,0,m,n, dp);
     }
-    public int f(int i, int j, int m, int n, HashMap<String, Integer> memo){
+    public int f(int i, int j, int m, int n, Integer[][] dp){
         if(i==m || j==n)
             return 0;
         
-        String key = i+"-"+j;
-        if(memo.containsKey(key)){
-            return memo.get(key);
-        }
+        if(dp[i][j]!=null)
+            return dp[i][j];
+        
         if(i==m-1 && j==n-1)
             return 1;
         
-        int down = f(i+1,j,m,n,memo);
-        int right = f(i,j+1,m,n,memo);
+        int down = f(i+1,j,m,n,dp);
+        int right = f(i,j+1,m,n,dp);
         
-        memo.put(key,down+right);
+        dp[i][j] = down + right;
         
         return down + right;
     }
