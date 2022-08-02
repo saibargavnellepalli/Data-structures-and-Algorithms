@@ -10,19 +10,19 @@
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        if(head == null)
-            return null;
-        
-        ListNode sp = head;
+       if(head == null)
+           return null;
         ListNode fp = head;
+        ListNode sp = head;
         
-        while(fp.next != null && fp.next.next!=null){
-            
-            sp = sp.next;
+        while(fp.next != null && fp.next.next != null){
             fp = fp.next.next;
+            sp = sp.next;
+                
         }
+        
         if(fp.next == null)
-            return sp;
+        return sp;
         
         return sp.next;
     }
