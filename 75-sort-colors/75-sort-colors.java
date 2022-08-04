@@ -8,23 +8,27 @@ class Solution {
           
           while(mid<=end){
               
-              if(arr[mid] == 2){
-                arr[mid] = arr[end];
-                  arr[end] = 2;
-                  end-=1;
+            
+              if(arr[mid] == 0){
+                int temp = arr[start];
+                  arr[start] = arr[mid];
+                  arr[mid] = temp;
+                  start+=1;
+                    mid+=1;
+               
               }
               
               else if(arr[mid] == 1){
                  
                   mid+=1;
               }
-              else if(arr[mid] == 0){
-                int temp = arr[start];
-                  arr[start] = arr[mid];
-                  arr[mid] = temp;
-                  start+=1;
-                  mid+=1;
+              else if(arr[mid] == 2){
+                
+                arr[mid] = arr[end];
+                  arr[end] = 2;
+                  end-=1;
               }
+              
               
           }
     }
