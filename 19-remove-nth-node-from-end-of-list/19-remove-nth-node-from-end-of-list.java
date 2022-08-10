@@ -17,21 +17,22 @@ class Solution {
         dummy.next = head;
         ListNode prev = dummy;
         
-        int i=1;
+       int i=1;
         while(i<=n){
             fp = fp.next;
-            i++;
+            i+=1;
         }
         
         while(fp != null){
             prev = sp;
-            sp = sp.next;
             fp = fp.next;
+            sp = sp.next;
         }
         
         prev.next = sp.next;
         
         return dummy.next;
+        
         
     }
 }
