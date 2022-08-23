@@ -14,39 +14,43 @@ class Solution {
         ListNode sp = head;
         ListNode fp = head;
         
-        while(fp != null && fp.next != null){
-            sp = sp.next;
+        while(fp.next != null && fp.next.next != null){
             fp = fp.next.next;
+            sp = sp.next;
         }
+    
+        ListNode firstList = head;
+        ListNode secondList = sp.next;
+        sp.next = null;
         
-        //System.out.println(sp.val);
-        ListNode prev = rev(sp);
-        ListNode st = head;
+        ListNode revList = rev(secondList);
         
-       
-         while(prev != null){
-             if(prev.val != st.val)
-                 return false;
-             prev = prev.next;
-             st = st.next;
-         }
-        
+    //     ListNode c1 = revList;
+    
+        while(revList != null){
+            if(firstList.val != revList.val)
+                return false;
+            
+            firstList = firstList.next;
+            revList = revList.next;
+        }
         return true;
     }
-    
     private ListNode rev(ListNode head){
-       ListNode prev = null;
-        ListNode temp = head;
-        ListNode curNode = head;
+       ListNode revL = null;
+       ListNode curNode = head;
+       ListNode temp = head;
         
         while(curNode != null){
             temp = curNode.next;
-            curNode.next = prev;
-            prev= curNode;
+            curNode.next = revL;
+            revL = curNode;
             curNode = temp;
         }
-       
         
-        return prev;
+        return revL;
+        
+        
     }
+    
 }
