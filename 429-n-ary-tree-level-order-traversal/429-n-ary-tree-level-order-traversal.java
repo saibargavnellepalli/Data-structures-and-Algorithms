@@ -36,26 +36,24 @@ class Solution {
         
     }
     
+    
     private void lvlOrder(Node root, Queue<Node> q, List<List<Integer>> list){
         
-        while(!q.isEmpty()){
-            
-            //add current level elements to list
-            int i=0;
-            int n = q.size();
-            List<Integer> ans = new ArrayList<>();
-            while(i<n){
-                Node temp = q.poll();
-                ans.add(temp.val);   
-                //to get nodes
-                for(Node currentChild : temp.children){
-                  
-                    q.add(currentChild);
-                   
-                }
-                 i+=1;
-            }
-            list.add(ans);
+      while(q.isEmpty()==false){
+         
+          
+          int n = q.size();
+          List<Integer> al = new ArrayList<>();
+          int i=0;
+          while(i<n){
+               Node temp = q.remove();
+              al.add(temp.val);
+              for(Node curChild : temp.children){
+                  q.add(curChild);
+              }
+              i++;
+          }
+          list.add(al);
+      }
         }
     }
-}
