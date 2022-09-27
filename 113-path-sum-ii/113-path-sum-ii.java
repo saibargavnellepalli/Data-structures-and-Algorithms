@@ -14,33 +14,32 @@
  * }
  */
 class Solution {
-    int i=0;
-    public List<List<Integer>> pathSum(TreeNode root, int k) {
-       List<Integer> list = new ArrayList<>();
-        List<List<Integer>> ans = new ArrayList<>();
-        
-        f(root,k,list,ans,0);
-        return ans;
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> ansList = new ArrayList<>();
+        List<Integer> pathList = new ArrayList<>();
+    findPaths(root,targetSum,ansList,pathList,0);
+        return ansList;
     }
-    private void f(TreeNode root, int k,List<Integer> list, List<List<Integer>> ans,int sum){
+    
+    public void findPaths(TreeNode root, int k,  List<List<Integer>> ansList, List<Integer> pathList,int currentSum){
         if(root == null)
             return;
-           //System.out.println(sum+root.val);
         
-       
-        list.add(root.val);
+        // adding current root to the path list
+        pathList.add(root.val);
+        System.out.println(pathList);
+        // updating current sum
+        currentSum += root.val;
         
-        if(root.left == null && root.right == null && sum+root.val == k){
-         
-           ans.add(new ArrayList<Integer>(list));
+        //add list to ans
+        if(root.left == null && root.right == null && currentSum == k){
+            ansList.add(new ArrayList<Integer>(pathList));
         }
-         //sum+=root.val;
         
-        f(root.left,k,list,ans,sum+root.val);
-        ///sum+=root.val;
-         f(root.right,k,list,ans,sum+root.val);
-        list.remove(list.size()-1);
-        return;
-            
+        // calls to the sub trees
+        findPaths(root.left, k, ansList, pathList, currentSum);
+         findPaths(root.right, k, ansList, pathList, currentSum);
+        
+        pathList.remove(pathList.size()-1);
     }
 }
