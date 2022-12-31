@@ -1,29 +1,50 @@
 class Solution {
     public int uniquePathsIII(int[][] grid) {
-        int zero = 0 , a = 0, b = 0 ;
-        for(int r = 0; r < grid.length ; r++){
-            for(int c = 0; c < grid[0].length; c++){
-                if(grid[r][c] == 0)   zero++;
-                   else if(grid[r][c] == 1){
-                    a = r;
-                    b = c;
+       
+        int n=grid.length;
+        int m = grid[0].length;
+        int zeros=0;
+        int i1=0,j1=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j] == 1){
+                    i1 = i;
+                    j1 = j;
+                }
+                else if(grid[i][j]==0){
+                    zeros += 1;
                 }
             }
         }
-        return path(grid, a, b, zero);
+        
+        return totalPaths(i1,j1,grid,n,m,zeros);
     }
-    private int path(int[][] grid, int x, int y, int zero){
-        if(x < 0 || y < 0 || x >= grid.length || y >= grid[0].length || grid[x][y] == -1)
-           return 0;
-        if(grid[x][y] == 2)
-           return zero == -1 ? 1 : 0;
-        grid[x][y] = -1;
-        zero--;
-        int totalCount = path(grid, x + 1, y, zero) + path(grid, x, y + 1, zero) +
-                         path(grid, x - 1, y, zero) + path(grid, x, y - 1, zero);
-        grid[x][y] = 0;
-        zero++;
-
-        return totalCount;
+    
+    public static int totalPaths(int i, int j, int[][] grid, int n, int m, int zeros){
+        if(i<0 || j<0 || i==n || j==m || grid[i][j] == -1){
+            return 0;
+        }
+        
+        if(grid[i][j] == 2){
+            return zeros==-1? 1 : 0;
+        }
+        
+        grid[i][j] = -1;
+        
+        zeros -=1;
+        
+        int total = totalPaths(i,j-1,grid,n,m,zeros)+ 
+                    totalPaths(i,j+1,grid,n,m,zeros)+ 
+                    totalPaths(i-1,j,grid,n,m,zeros)+ 
+                    totalPaths(i+1,j,grid,n,m,zeros);
+        
+        zeros+=1;
+        grid[i][j] = 0;
+        
+        return total;
+            
+            
+        
+        
     }
 }
