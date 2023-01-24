@@ -15,10 +15,7 @@ class Solution {
                 s = m+1;
             }
             else{
-               for(int i=0;i<m1;i++){
-                   if(matrix[m][i] == k) return true;
-               } 
-                return false;
+              return bs(m,matrix,k);
             }
             
             
@@ -26,4 +23,28 @@ class Solution {
         
         return false;
     }
+    public boolean bs(int midInd, int matrix[][],int k){
+    
+        int start =0, end=matrix[0].length-1;
+        int mid;
+        while (start<=end){
+            //Making array half everytime
+            mid=(start+end)/2;
+
+            //checking in which part the element is present
+            if (matrix[midInd][mid]<k){
+                start=mid+1;
+            }
+            else if (matrix[midInd][mid]>k){
+                end=mid-1;
+            }
+            if (matrix[midInd][mid]==k)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+      
+   } 
 }
