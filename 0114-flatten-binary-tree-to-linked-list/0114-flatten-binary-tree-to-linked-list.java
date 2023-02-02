@@ -25,11 +25,11 @@ class Solution {
         
         root.right = root.left;
         root.left = null;
-        
-        while(root.right != null){
-            root = root.right;
+        TreeNode t = root;
+        while(t.right != null){
+            t = t.right;
         }
-        root.right = temp;
+        t.right = temp;
         
         return;
     }
