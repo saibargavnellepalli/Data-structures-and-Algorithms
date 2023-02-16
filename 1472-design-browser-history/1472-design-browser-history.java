@@ -1,48 +1,51 @@
-class DLLNode{
-    String url;
-    DLLNode next ;
-    DLLNode prev ;
-    
-    DLLNode(String url){
-        this.url = url;
-        
+
+class Node{
+    String val;
+    Node next;
+    Node prev;
+    Node(String val){
+        this.val = val;
     }
 }
 
 class BrowserHistory {
-    
-   DLLNode head = null;
-   DLLNode curPointer = null;
-    
+      Node cur;
+     
     public BrowserHistory(String homepage) {
-        head = new DLLNode(homepage);
-         curPointer = head;
+        cur = new Node(homepage);
+        
     }
     
     public void visit(String url) {
-       DLLNode newNode = new DLLNode(url);
-        curPointer.next = newNode;
-        newNode.prev = curPointer;
-        curPointer = newNode;
-        return;
+        cur.next = new Node(url);
+        cur.next.prev = cur;
+        cur = cur.next;
     }
     
     public String back(int steps) {
-        int i=1;
-        while(curPointer.prev != null && steps>0){
-            curPointer = curPointer.prev;
-            steps-=1;
+        //int i=1;
+        
+        for(int i=1;i<=steps;i++){
+            if(cur.prev == null){
+                return cur.val;
+            }
+            cur = cur.prev;
         }
-        return curPointer.url;
+        
+        return cur.val;
     }
     
     public String forward(int steps) {
-        int i=1;
-        while(curPointer.next != null && steps>0){
-            curPointer = curPointer.next;
-            steps -=1;
+          //int i=1;
+        
+        for(int i=1;i<=steps;i++){
+            if(cur.next == null){
+                return cur.val;
+            }
+            cur = cur.next;
         }
-        return curPointer.url;
+        
+        return cur.val;
     }
 }
 
