@@ -24,11 +24,12 @@ class Solution {
            
                 //al.add(i);
             boolean t = jump(ind+i,nums,dp);
-            if(t == true){
-            dp[ind] = t ;
-                return true;}
             
-           ans = ans || t;
+            if(t==true) return t;
+           
+            ans = t || ans;
+            
+           
                
             
         }
