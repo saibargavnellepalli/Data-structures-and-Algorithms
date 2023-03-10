@@ -17,6 +17,11 @@ class Solution {
         long ans = Integer.MIN_VALUE;
         Arrays.sort(arr);
         
+        // 3 largest, 2 smallest
+        
+        three_largest(arr);
+        two_Smallest(arr);
+        
         long largest = (arr[n-1]*arr[n-2]*arr[n-3]);
         ans = Math.max(ans,largest);
         
@@ -37,12 +42,62 @@ class Solution {
         ans = Math.max(ans,largest);
         }
         
-        if(neg>=2){
-           largest = (arr[neg]*arr[neg-1]*arr[neg-2]);
-        ans = Math.max(ans,largest); 
-        }
+      
         
         return ans;
+    }
+    public void three_largest(Long arr[]){
+        long max1=Integer.MIN_VALUE;
+        long max2 = Integer.MIN_VALUE;
+        long max3 = Integer.MIN_VALUE;
+        
+        for(int i=0;i<arr.length;i++){
+            
+            if(arr[i] > max1){
+                max3 = max2;
+                max2 = max1;
+                max1 = arr[i];
+            }
+            else if(arr[i] > max2){
+                max3 = max2;
+                max2 = arr[i];
+            }
+            else if(arr[i] > max3){
+                max3 = arr[i];
+            }
+            
+        }
+        
+        int n = arr.length;
+        arr[n-1] = max1;
+        arr[n-2] = max2;
+        arr[n-3] = max3;
+    }
+    
+    public void two_Smallest(Long arr[]){
+        long max1 = Integer.MAX_VALUE;
+        long max2 = Integer.MAX_VALUE;
+        //long max3 = Integer.MIN_VALUE;
+        
+        for(int i=0;i<arr.length;i++){
+            
+            if(arr[i] < max1){
+               // max3 = max2;
+                max2 = max1;
+                max1 = arr[i];
+            }
+            else if(arr[i] < max2){
+                //max3 = max2;
+                max2 = arr[i];
+            }
+           
+            
+        }
+        
+        int n = arr.length;
+        arr[0] = max1;
+        arr[1] = max2;
+        //arr[n-3] = max3;
     }
 }
 
