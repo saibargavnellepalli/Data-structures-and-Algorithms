@@ -10,10 +10,10 @@
  */
 class Solution {
     
-    
+    ListNode node;
     ArrayList<ListNode> list = new ArrayList<>();
     public Solution(ListNode head) {
-       
+       node = head;
         ListNode t = head;
         
         while(t != null){
@@ -25,8 +25,11 @@ class Solution {
     
     public int getRandom() {
        int ind = (int)(Math.random()*list.size());
-        
-        return list.get(ind).val;
+                ListNode t = node;
+                 for(int i=0;i<ind;i++){
+                     t = t.next;
+                 }
+        return t.val;
     }
 }
 
