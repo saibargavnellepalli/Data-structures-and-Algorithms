@@ -10,43 +10,35 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        
+       // if(lists == null || lists.size()== 0) return null;
         
         Comparator<ListNode> custComp = new Comparator<ListNode>(){
-            public int compare(ListNode a, ListNode b){
-                return a.val - b.val;
-            }
+          public int compare(ListNode a, ListNode b){
+              return a.val-b.val;
+          }  
         };
-        
-        PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>(custComp);
-        
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(custComp);;
         
         for(ListNode curList : lists){
             if(curList != null)
             pq.offer(curList);
         }
         
-        ListNode ans = new ListNode(-1);
-        ListNode dummy = ans;
+        ListNode ansNode = new ListNode(-1);
+        ListNode dummyHead = ansNode;
         
         while(!pq.isEmpty()){
-            ListNode t = pq.poll();
+            ListNode temp = pq.poll();
             
+            ansNode.next = temp;
+            ansNode = ansNode.next;
             
-            ans.next = t;
+            temp = temp.next;
             
-            ans = t;
-           
-            
-            
-            if(t.next != null){
-                pq.add(t.next);
-            }
-            
-            
-            
+            if(temp != null)
+                pq.offer(temp);
         }
         
-        return dummy.next;
+        return dummyHead.next;
     }
 }
