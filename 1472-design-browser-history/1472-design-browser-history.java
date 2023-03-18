@@ -1,51 +1,54 @@
-
 class Node{
     String val;
-    Node next;
     Node prev;
-    Node(String val){
-        this.val = val;
+    Node next;
+    
+    Node(String url){
+        val = url;
     }
 }
 
 class BrowserHistory {
-      Node cur;
-     
+    Node head;
+    int size = 0;
+    
     public BrowserHistory(String homepage) {
-        cur = new Node(homepage);
+       head = new Node(homepage);
+       //size += 1;
         
     }
     
     public void visit(String url) {
-        cur.next = new Node(url);
-        cur.next.prev = cur;
-        cur = cur.next;
+        head.next = new Node(url);
+        head.next.prev = head;
+        head = head.next;
+        
     }
     
-    public String back(int steps) {
-        //int i=1;
-        
-        for(int i=1;i<=steps;i++){
-            if(cur.prev == null){
-                return cur.val;
-            }
-            cur = cur.prev;
+    public String back(int t) {
+       // int t = size;
+        while(head.prev != null && t > 0){
+              //if(head.prev == null) return head.val;
+            head = head.prev;
+            t--;
         }
-        
-        return cur.val;
+       
+        return head.val;
     }
     
-    public String forward(int steps) {
-          //int i=1;
-        
-        for(int i=1;i<=steps;i++){
-            if(cur.next == null){
-                return cur.val;
-            }
-            cur = cur.next;
+    public String forward(int t) {
+        //int t = size;
+         while(head.next != null && t > 0){
+             //if(head.next == null) return head.val;
+            head = head.next;
+             
+            t--;
         }
         
-        return cur.val;
+       
+        
+        return head.val;
+        
     }
 }
 
