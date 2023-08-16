@@ -14,15 +14,18 @@
  * }
  */
 class Solution {
-    public TreeNode searchBST(TreeNode root, int val) {
+    public TreeNode searchBST(TreeNode root, int key) {
         
-        // 7
+       
+        // bst -> deciding to which part we have to move
+        
+      // key -> 2
         
         while(root != null){
-        if(root.val > val){
+        if(key < root.val){
             root = root.left;
         }
-        else if(root.val < val){
+        else if(key > root.val){
             root = root.right;
         }
         else{
@@ -32,7 +35,6 @@ class Solution {
         }
         
         return null;
-        
         
     }
 }
