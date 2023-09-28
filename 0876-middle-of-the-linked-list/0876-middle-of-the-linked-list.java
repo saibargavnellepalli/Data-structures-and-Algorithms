@@ -11,8 +11,8 @@
 class Solution {
     public ListNode middleNode(ListNode head) {
         
-        ListNode sp = head;
         ListNode fp = head;
+        ListNode sp = head;
         
         while(fp != null && fp.next != null){
             fp = fp.next.next;
@@ -20,6 +20,5 @@ class Solution {
         }
         
         return sp;
-      
     }
 }
