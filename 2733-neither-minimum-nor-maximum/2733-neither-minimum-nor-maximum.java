@@ -1,30 +1,19 @@
 class Solution {
     public int findNonMinOrMax(int[] nums) {
-       
         
-       int minElm = nums[0];
-        int n = nums.length;
+        //sort
+        //return any element other than first and last element
         
-        for(int i=0;i<n;i++){
-            if(nums[i] < minElm){
-                minElm = nums[i];
-            }    
+        
+        //edge case
+        if(nums.length <= 2){
+            return -1;
         }
         
-        int maxElm = nums[0];
-        for(int i=0;i<n;i++){
-            if(nums[i] > maxElm){
-                maxElm = nums[i];
-            }
-        }
+        Arrays.sort(nums);
         
-        for(int i=0;i<n;i++){
-            if(nums[i] != minElm && nums[i] != maxElm){
-                return nums[i];
-            }
-        }
+        int ans = nums[1];
         
-        
-    return -1;
+        return ans;
     }
 }
