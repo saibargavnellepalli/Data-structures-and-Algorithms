@@ -1,23 +1,34 @@
 class Solution {
     public int missingNumber(int[] nums) {
         
+         
+            int n = nums.length;
+            for(int i=0; i<n ;i++){
+                
+              boolean ans  = isPresent(i, nums);
+                
+                if(ans == false){
+                    return i;
+                }
+                
+            }
+        
+        
+       return n;     
+    }
+    
+     public static boolean isPresent(int key, int nums[]){
+        
         int n = nums.length;
         
-        //sorting 
-        Arrays.sort(nums);
-        
-        //checking with the index
-        
-        for(int ind =0; ind < n; ind++){
+        for(int i=0; i<n;i++){
             
-            if( ind != nums[ind]){
-                return ind;
+            if(nums[i]  == key ){
+                return true;
             }
         }
         
-        
-        return n;
-        
+        return false;
         
     }
 }
