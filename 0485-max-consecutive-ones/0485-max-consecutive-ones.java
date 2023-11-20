@@ -10,13 +10,14 @@ class Solution {
         for(int j=0;j<n;j++){
             if(nums[j] == 1){
                 ones++;
-                 ans = Math.max(ones,ans);
+                 
             }   
             else {
-               
+               ans = Math.max(ones,ans);
                 ones = 0;
             }
         }
+        ans = Math.max(ones,ans);
         
         return ans;
     }
