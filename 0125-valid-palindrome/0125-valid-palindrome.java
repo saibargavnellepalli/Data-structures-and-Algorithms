@@ -1,8 +1,6 @@
 class Solution {
     public boolean isPalindrome(String s) {
-      //create a string which only have the alphanumeric
-        //we up -> lc
-        //palindrome
+        
         
         String temp = "";
         
@@ -14,24 +12,16 @@ class Solution {
             }
         }
         
+        s = temp.toLowerCase();
         
-        String str = temp.toLowerCase();
+        int i=0, j=s.length()-1;
         
-        
-        
-      return  palindrome(str);
-    }
-    
-    public boolean palindrome(String str){
-        int n = str.length();
-        int head=0,tail=n-1;
-        
-        while(head <= tail){
-            if(str.charAt(head) != str.charAt(tail)){
+        while(i<=j){
+            if(s.charAt(i) != s.charAt(j)){
                 return false;
             }
-            head++;
-            tail--;
+            i++;
+            j--;
         }
         
         return true;
