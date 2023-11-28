@@ -1,7 +1,6 @@
 class Solution {
     public boolean isPalindrome(String s) {
         
-        
         String temp = "";
         
         for(int i=0;i<s.length();i++){
@@ -12,18 +11,23 @@ class Solution {
             }
         }
         
-        s = temp.toLowerCase();
+        temp = temp.toLowerCase();
         
-        int i=0, j=s.length()-1;
+        int i=0;
+        int j=temp.length()-1;
         
+        System.out.println(temp);
         while(i<=j){
-            if(s.charAt(i) != s.charAt(j)){
+            if(temp.charAt(i) != temp.charAt(j)){
                 return false;
+                
+                
             }
             i++;
             j--;
         }
         
         return true;
+        
     }
 }
