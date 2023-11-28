@@ -1,33 +1,47 @@
 class Solution {
     public boolean isPalindrome(String s) {
         
-        String temp = "";
         
+// "Abca" -> "abca"
+// 3 steps 
+// 1) we have to remove all non-alphanumeric 
+// 2) convert the string to lowercase
+// 3) after doing above steps, we have to find if the string is palindrome or not
+
+
+        //step-1
+     String newStr = "";
+ 
         for(int i=0;i<s.length();i++){
-            char ch = s.charAt(i);
             
-            if(Character.isLetterOrDigit(ch)){
-                temp += ch;
+            if(Character.isLetterOrDigit(s.charAt(i)) == true){
+                newStr += s.charAt(i);
             }
+            
         }
         
-        temp = temp.toLowerCase();
+      
         
-        int i=0;
-        int j=temp.length()-1;
+        //step-2
         
-        System.out.println(temp);
-        while(i<=j){
-            if(temp.charAt(i) != temp.charAt(j)){
+       newStr = newStr.toLowerCase();
+        
+        //step-3 
+        
+        int start =0, end = newStr.length()-1;
+        
+        while(start <= end){
+            
+            if(newStr.charAt(start) != newStr.charAt(end) ){
                 return false;
-                
-                
             }
-            i++;
-            j--;
+            start++;
+            end--;
         }
         
         return true;
+        
+        
         
     }
 }
