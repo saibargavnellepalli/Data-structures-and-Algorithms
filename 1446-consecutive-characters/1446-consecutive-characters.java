@@ -1,39 +1,36 @@
 class Solution {
     public int maxPower(String s) {
         
-        //abceedffffr
-        
-        //leetcode
-        
-        //leetcordddde
-        
         
         int i=1;
-        int ans = 1;
+        int n = s.length();
         
-        while(i<s.length()){
+        int answer = 1;
+        
+        while( i < n){
+           
+            char curCharacter = s.charAt(i);
+            char prevCharacter = s.charAt(i-1);
             
-            char prevElm = s.charAt(i-1);
-            char curElm = s.charAt(i);
-            
-            if(curElm == prevElm ){
+            if(curCharacter == prevCharacter){
+                // a seqeunce can be possible and we may get the answer
                 
-                int countOfSeq = 1;
+                int counter = 1;
                 
-                while(i<s.length() && s.charAt(i) == prevElm){
-                    countOfSeq++;
+                while(i<n && s.charAt(i) == prevCharacter){
+                    counter++;
                     i++;
                 }
                 
-                ans = Math.max(ans, countOfSeq);
+                if(counter > answer){
+                    answer = counter;
+                  }
             }
             else{
                 i++;
             }
         }
         
-        return ans;
-        
-        
+        return answer;
     }
 }
