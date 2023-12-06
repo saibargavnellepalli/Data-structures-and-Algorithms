@@ -1,24 +1,40 @@
 class Solution {
     public char repeatedCharacter(String s) {
         
-         HashMap<Character,Integer> map = new HashMap<>();
+        //question
+        //approach -> find occurance 
+        //code
         
-        for(int i=0;i<s.length();i++){
-           char ch = s.charAt(i);
+        
+        // aradccd
+        
+        // find freq
+        // if count is 2 -> that is the answer
+        
+        HashMap<Character,Integer> map = new HashMap<>();
+        
+        for(int i=0;i<s.length();i++)
+        {
+            char ch = s.charAt(i);
+            
             
             if(map.containsKey(ch)){
                 int val = map.get(ch);
-                map.put(ch,val+1);
+                val = val+1;
+                map.put(ch,val);
             }
             else{
                 map.put(ch,1);
             }
             
-            if(map.get(ch) == 2){
-                return ch;
-            }
+            
+            if(map.get(ch) == 2) return ch;
         }
         
-       return ' ';
+        
+        return ' ';
+        
+        
+        
     }
 }
