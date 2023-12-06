@@ -1,40 +1,51 @@
 class Solution {
     public char repeatedCharacter(String s) {
         
-        //question
-        //approach -> find occurance 
-        //code
+       
+        // abcddz
         
+        // a- 1
+        // b - 1
+        // c - 1
+        // d - 2
         
-        // aradccd
+        // abddbrcb
         
-        // find freq
-        // if count is 2 -> that is the answer
+        // a - 1
+        // b -1
+        // d - 2
+        //
         
-        HashMap<Character,Integer> map = new HashMap<>();
+        // Hashmap
+        // Ocuurance -> while finding it, check if at any point
+                   // the value becomes 2 
         
-        for(int i=0;i<s.length();i++)
-        {
-            char ch = s.charAt(i);
+        // code
+        HashMap<Character , Integer > map = new HashMap<>();
+        int n = s.length();
+        
+        for(int i=0;i<n;i++){
             
+            char ch = s.charAt(i);
             
             if(map.containsKey(ch)){
                 int val = map.get(ch);
-                val = val+1;
+                val+=1;
                 map.put(ch,val);
             }
             else{
                 map.put(ch,1);
             }
             
+            int val = map.get(ch);
             
-            if(map.get(ch) == 2) return ch;
+            if(val == 2){
+                return ch;
+            }
+            
         }
         
-        
         return ' ';
-        
-        
         
     }
 }
