@@ -1,21 +1,25 @@
 class Solution {
-    public int[] twoSum(int[] nums, int k) {
+    public int[] twoSum(int[] nums, int target) {
+     
+        //array to store final answer
+        int answerArray[] = {-1,-1};
         
-        int ans[] = {-1,-1};
-        Map<Integer,Integer> map = new HashMap<>();
+        int n = nums.length;
         
-        for(int  i=0;i<nums.length;i++){
-           
-            if(map.containsKey(k-nums[i])){
-                ans[0] = i;
-                ans[1] = map.get(k-nums[i]);
+        HashMap<Integer,Integer> map = new HashMap<>();
+        
+        for(int i=0;i<n;i++){
                 
-               break;
+            if(map.containsKey(target-nums[i])){
+                answerArray[0] = i;
+                answerArray[1] = map.get(target-nums[i]);
             }
-            
-            
-            map.put(nums[i],i);
+            else{
+                map.put(nums[i],i);
+            }
         }
-        return ans;
+        
+        return answerArray;
+        
     }
 }
