@@ -1,32 +1,23 @@
 class Solution {
-    public int[] twoSum(int[] nums, int k) {
-       //2+7 = 9
-    //   0 1 
+    public int[] twoSum(int[] nums, int target) {
         
-        // [3,2,4]  6
         
-        //    1,2
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int ans[] = {-1,-1};
         
-        int answerArray[] = {-1,-1};
         int n = nums.length;
-        
         for(int i=0;i<n;i++){
-            int a = nums[i];
+            int b = nums[i];
             
-        
-            for(int j=i+1;j<n;j++){
-                int b = nums[j];
-                
-                if(a + b == k ){
-                    
-                    answerArray[0] = i;
-                    answerArray[1] = j;
-                    
-                }
+            
+            if(map.containsKey(target-b)){
+             ans[0] = i;
+             ans[1] = map.get(target-b);
             }
             
+            map.put(b,i);
         }
         
-        return answerArray;
+        return ans;
     }
 }
