@@ -16,14 +16,14 @@ class Solution {
                     map.remove(s.charAt(rel));
                     rel++;
                 }
-                map.put(ch,acq);
+               
             }
-            else{
+            
                 map.put(ch,acq);
                 
                
                 ans = Math.max(acq-rel+1,ans);
-            }
+            
         }
         
         return ans;
