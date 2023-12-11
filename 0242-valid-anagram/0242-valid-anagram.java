@@ -1,40 +1,40 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
         
-        // true/false
         
-      
-               
-               
-               //sort both the string
-               // compare each elemnts
-               
-               
-               char ch1[] = s.toCharArray();
-               char ch2[] = t.toCharArray();
+        if(s.length() != t.length()) return false;
+                    
+              HashMap<Character,Integer> map = new HashMap<>();
+        
+              for(int i=0;i<s.length();i++){
+                  
+                  char ch = s.charAt(i);
+                  
+                  if(map.containsKey(ch)){
+                      map.put(ch,map.get(ch)+1);
+                  }
+                  else{
+                      map.put(ch,1);
+                  }
+              }
         
         
-             Arrays.sort(ch1);
-             Arrays.sort(ch2);
+         for(int i=0;i<t.length();i++){
+                  
+                  char ch = t.charAt(i);
+                  
+                  if(map.containsKey(ch)  && map.get(ch) >= 1){
+                      map.put(ch,map.get(ch)-1);
+                  }
+             else{
+                 return false;
+             }
+                  
+              }
         
         
-            if(ch1.length != ch2.length) return false;
-               
-               for(int i=0;i<ch1.length;i++){
-                   if(ch1[i] != ch2[i]) return false;
-               }
-        
-        return true;
-               
-               
-               
-               
-               
-               
-             
-  
-             
-             
+          return true;
+         
     
     }
 }
