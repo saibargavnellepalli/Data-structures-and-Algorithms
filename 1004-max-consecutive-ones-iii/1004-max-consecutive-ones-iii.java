@@ -3,6 +3,13 @@ class Solution {
         
         
         // [1,1,1,0,0,0,1,1,1,1,0],
+      
+       // k=0, 
+       // k = 1
+    //  k  = 2
+        // k = 3
+        // k = 4
+        // k = 5
         
         int one=0, zero=0, ans=0;
         
@@ -13,7 +20,7 @@ class Solution {
             
             int cur = nums[acq];
             
-            if(cur == 1) one++;
+           
             if(cur == 0) zero++;
             
             //valid case
@@ -25,7 +32,7 @@ class Solution {
                 
                 
                 while(zero > k){
-                    if(nums[rel] == 1) one--;
+                  
                     if(nums[rel] == 0) zero--;
                     
                     rel++;
