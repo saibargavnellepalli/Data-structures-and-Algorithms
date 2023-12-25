@@ -1,22 +1,26 @@
 class MyStack {
 
     Queue<Integer> q;
+    
     public MyStack() {
         q = new LinkedList<>();
     }
     
     public void push(int x) {
         
-        int n = q.size();
+        int length = q.size();
+        //add x to queue
+        q.add(x);
         
-        q.offer(x);
-        
-        for(int i=1; i<=n; i++){
-            q.offer(q.poll());
+        // reverse the queue
+        for(int i=1; i<=length; i++){
+            int cur = q.poll();
+            q.offer(cur);
         }
     }
     
     public int pop() {
+        
         
         return q.poll();
     }
