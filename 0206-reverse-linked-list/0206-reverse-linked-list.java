@@ -23,22 +23,20 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
       
+      ListNode ans = null;
+     
         
-        ListNode ans = null;
-        
-        while(head != null){
+        while( head != null){
             
-            ListNode temp = head.next;
+            ListNode nextNode = head.next;
             
             head.next = ans;
-            ans = head;
+            ans= head;
             
-            head = temp;
-            
+            head = nextNode;
         }
-        return ans;
             
         
-            
+           return ans; 
     }
 }
