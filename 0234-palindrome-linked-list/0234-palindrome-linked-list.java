@@ -11,37 +11,47 @@
 class Solution {
     public boolean isPalindrome(ListNode head) {
         
-        // 1 2 2 1
         
-        if(head.next == null) return true;
+        if(head.next == null)  return true;
         
+        //step-1 [Middle of LL]
         ListNode fp = head;
         ListNode sp = head;
         ListNode prev = null;
         
         while(fp != null && fp.next != null){
-            prev = sp;
-            fp = fp.next.next;
+            prev = sp;  
             sp = sp.next;
+            fp = fp.next.next;
+          
         }
+        
+        //step -2 
         
         prev.next = null;
         
-        ListNode newList1 = head;
-        ListNode newList2 = reverseList(sp);
+        ListNode firstHalf = head;
+        ListNode secondHalf = sp;
         
-        while(newList1 != null && newList2 != null){
-            if(newList1.val != newList2.val) return false;
+        // step- 3
+        secondHalf = reverseList(sp);
+        
+        //step-4
+        while(firstHalf != null && secondHalf != null){
             
-            newList1 = newList1.next;
-            newList2 = newList2.next;
-                
+            if(firstHalf.val != secondHalf.val){
+                return false;
+                }
+            
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
         }
+        
         
         return true;
     }
     
-    public ListNode reverseList(ListNode head) {
+     public ListNode reverseList(ListNode head) {
         
         ListNode ans = null;
         
