@@ -26,7 +26,7 @@ class Solution {
         prev.next = null;
         
        ListNode l1 = head;
-       ListNode l2 = (fp == null) ? reverseList(sp) : reverseList(sp.next);
+       ListNode l2 = (fp == null) ? reverseList(sp) : reverseList(sp);
         
         while(l1 != null && l2 != null){
             if(l1.val != l2.val) return false;
