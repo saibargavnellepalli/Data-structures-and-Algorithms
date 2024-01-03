@@ -9,34 +9,19 @@
  * }
  */
 class Solution {
-    public ListNode removeElements(ListNode head, int val) {
-      
-        /*
-        ListNode dummy = new ListNode(-1);
-       dummy.next = head;
-        ListNode cur = dummy;
+    public ListNode removeElements(ListNode head, int n) {
         
-        while(cur != null && cur.next != null){
-            
-            if(cur.next.val == val){
-                cur.next = cur.next.next;
-            }
-            else{
-            cur = cur.next;
-            }
-        }
-        
-        return dummy.next;
-       */
         
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
         
+        
         ListNode cur = dummy;
+        
         
         while(cur != null && cur.next != null){
             
-            if(cur.next.val == val){
+            if(cur.next.val  == n){
                 cur.next = cur.next.next;
             }
             else{
@@ -45,7 +30,5 @@ class Solution {
         }
         
         return dummy.next;
-        
-        
     }
 }
