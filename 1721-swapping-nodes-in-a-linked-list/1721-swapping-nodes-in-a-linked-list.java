@@ -9,40 +9,36 @@
  * }
  */
 class Solution {
-    public ListNode swapNodes(ListNode head, int n) {
-      if(head == null || head.next == null){
-          return head;
-      }
-          ListNode sp = head;
-        ListNode fp = head;
-        ListNode dummy = new ListNode(-1);
-        dummy.next = head;
-        ListNode prev = dummy;
+    public ListNode swapNodes(ListNode head, int k) {
         
-        int i=1,k=1;
-        ListNode toSwap = head;
-        while(i<=n){
-           
+        ListNode sp = head;
+        ListNode fp = head;
+        
+        int i=1;
+        
+        ListNode first = null;
+        ListNode second = null;
+        
+        
+        while(i<k){
             fp = fp.next;
-           if(i==n-1)
-               toSwap = fp;
             i++;
         }
         
-        while(fp != null){
-            
-            prev = sp;
+        first = fp;
+        
+        while(fp.next != null){
             sp = sp.next;
             fp = fp.next;
         }
         
-       // prev.next = sp.next;
-        int te = toSwap.val;
-        toSwap.val = sp.val;
-        sp.val = te;
+        second = sp;
         
+        int temp = first.val;
+        first.val = second.val;
+        second.val = temp;
         
-        return dummy.next;
+        return head;
         
     }
 }
