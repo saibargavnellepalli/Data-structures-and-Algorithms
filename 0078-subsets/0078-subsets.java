@@ -13,7 +13,12 @@ class Solution {
     public void sub(int i, int nums[], List<Integer> list){
         
         if(i == nums.length){
-            ans.add(new ArrayList<>(list));
+           List<Integer> l = new ArrayList<>();
+            
+            l.addAll(list);
+            Collections.sort(l);
+            
+            ans.add(l);
             return;
         }
         
