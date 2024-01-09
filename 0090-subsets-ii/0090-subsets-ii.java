@@ -1,35 +1,36 @@
 class Solution {
-  Set<List<Integer>> ans = new HashSet<>();
+    
+     Set<List<Integer>> ans = new HashSet<>();
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         
-        List<Integer> list = new ArrayList<>();
         
-        combinations(0,0,nums,list);
+         List<Integer> list = new ArrayList<>();
+        sub(0, nums, list);
+        
         return new ArrayList<>(ans);
+        
     }
     
-    public void combinations(int i, int sum, int[] arr, List<Integer> list){
+     public void sub(int i, int nums[], List<Integer> list){
         
-       // System.out.println(list);
-           
-        if(i==arr.length){
-            List<Integer> l = new ArrayList<>();
+        if(i == nums.length){
+           List<Integer> l = new ArrayList<>();
+            
             l.addAll(list);
             Collections.sort(l);
-           ans.add(l);
+            
+            ans.add(l);
             return;
         }
         
+        //take
+        list.add(nums[i]);
+        sub(i+1, nums, list);
         
         
-       list.add(arr[i]);
-      
-        combinations(i+1,sum,arr,list);
-        
+        //removing/missing
         int n = list.size();
-       
         list.remove(n-1);
-        
-        combinations(i+1,sum,arr,list);
+        sub(i+1, nums, list);
     }
 }
