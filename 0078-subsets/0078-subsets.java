@@ -1,5 +1,5 @@
 class Solution {
-    Set<List<Integer>> ans = new HashSet<>();
+    List<List<Integer>> ans = new ArrayList<>();
     public List<List<Integer>> subsets(int[] nums) {
         
         List<Integer> list = new ArrayList<>();
