@@ -5,7 +5,7 @@ class Solution {
         List<Integer> list = new ArrayList<>();
         
         combinations(0,0,nums,list);
-        return new ArrayList<>(ans);
+        return ans;
     }
     
     public void combinations(int i, int sum, int[] arr, List<Integer> list){
@@ -20,9 +20,6 @@ class Solution {
         
             
        
-        
-     
-        
         list.add(arr[i]);
       
         combinations(i+1,sum,arr,list);
