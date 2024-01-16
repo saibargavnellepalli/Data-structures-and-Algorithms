@@ -16,25 +16,31 @@
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         
+        
+        
         return isSame(root.left,root.right);
+        
     }
     
     public boolean isSame(TreeNode p, TreeNode q){
         
         
-        if(p ==  null && q != null) return false;
-        if(p != null && q == null) return false;
-          if(p==null || q==null) return true;
+        //true
+        if(p == null && q == null) return true;
+        
+        // false
+        if(p!=null && q==null) return false;
+        if(p==null && q!=null) return false;
         
         if(p.val != q.val) return false;
         
-      
         
         
-        // checking left and right subtree in both subtrees
-        boolean left = isSame(p.left, q.right);
-        boolean right = isSame(p.right,q.left);
+       boolean left = isSame(p.left, q.right);
+       boolean right = isSame(p.right, q.left);
         
         return left && right;
+        
+        
     }
 }
