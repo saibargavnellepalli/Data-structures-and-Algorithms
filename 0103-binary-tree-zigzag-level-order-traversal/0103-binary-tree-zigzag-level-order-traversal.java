@@ -15,59 +15,59 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+          List<List<Integer>> main = new ArrayList<>();
         
-          List<List<Integer>> ans = new ArrayList<>();
-        
-        if(root == null) return ans;
+        if(root == null) return main;
         
         Queue<TreeNode> q = new LinkedList<>();
         
-        q.offer(root);
+        q.add(root);
         
-        boolean leftToright = true;
+        boolean leftToRight = true;
         
-        while(q.isEmpty() == false){
+        while(!q.isEmpty()){
             
             int n = q.size();
-            
             List<Integer> list = new ArrayList<>();
             Stack<Integer> st = new Stack<>();
             
             for(int i=1; i<=n; i++){
                 
-                TreeNode temp = q.poll();
+                TreeNode elem = q.remove();
                 
-                if(temp.left != null) q.offer(temp.left);
-                if(temp.right != null) q.offer(temp.right);
                 
-                if(leftToright == false){
-                     st.push(temp.val);
+                if(leftToRight){
+                list.add(elem.val);
                 }
                 else{
-                list.add(temp.val);
+                    st.add(elem.val);
                 }
+                if(elem.left != null) q.add(elem.left);
+                if(elem.right != null) q.add(elem.right);
                 
-               
+              }
+            
+            if(leftToRight){
+            
+            main.add(list);
+                
+                leftToRight = false;
             }
             
-            if(leftToright == false){
-                
-                while(st.isEmpty() == false){
-                    list.add(st.pop());
-                    
-                }
-                leftToright = true;
-                ans.add(list);
-            }
             else{
-            
-                ans.add(list);
-                leftToright = false;
+                
+                while(!st.isEmpty()){
+                    list.add(st.pop());
+                }
+                
+                main.add(list);
+                
+                leftToRight = true;
+                
             }
+            
         }
         
-        
-        
-        return ans;
+        return main;
     }
 }
