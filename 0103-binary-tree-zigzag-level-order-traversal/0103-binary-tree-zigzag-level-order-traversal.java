@@ -16,51 +16,58 @@
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         
-        Deque<TreeNode> dq = new LinkedList<>();
-        List<List<Integer>> ans = new ArrayList<>();
-        boolean qTurn = true;
-        if(root == null) return ans;
-        dq.offer(root);
+          List<List<Integer>> ans = new ArrayList<>();
         
-        while(!dq.isEmpty()){
-           
-            ArrayList<Integer> list = new ArrayList<>();
-            if(qTurn){
-                int n = dq.size();
-                for(int i=0;i<n;i++){
-                    TreeNode t = dq.pollFirst();
-                    list.add(t.val);
-                    if(t.left != null)
-                    dq.addLast(t.left);
-                    
-                    if(t.right != null)
-                    dq.addLast(t.right);
-                    
-                    
+        if(root == null) return ans;
+        
+        Queue<TreeNode> q = new LinkedList<>();
+        
+        q.offer(root);
+        
+        boolean leftToright = true;
+        
+        while(q.isEmpty() == false){
+            
+            int n = q.size();
+            
+            List<Integer> list = new ArrayList<>();
+            Stack<Integer> st = new Stack<>();
+            
+            for(int i=1; i<=n; i++){
+                
+                TreeNode temp = q.poll();
+                
+                if(temp.left != null) q.offer(temp.left);
+                if(temp.right != null) q.offer(temp.right);
+                
+                if(leftToright == false){
+                     st.push(temp.val);
+                }
+                else{
+                list.add(temp.val);
                 }
                 
-                qTurn = false;
+               
+            }
+            
+            if(leftToright == false){
+                
+                while(st.isEmpty() == false){
+                    list.add(st.pop());
+                    
+                }
+                leftToright = true;
+                ans.add(list);
             }
             else{
-                 int n = dq.size();
-                for(int i=0;i<n;i++){
-                    TreeNode t = dq.pollLast();
-                    list.add(t.val);
-                    if(t.right != null)
-                    dq.addFirst(t.right);
-                    
-                    if(t.left != null)
-                    dq.addFirst(t.left);
-                    
-                    
-                }
-                
-                qTurn = true;
+            
+                ans.add(list);
+                leftToright = false;
             }
-            ans.add(list);
         }
         
-        return ans;
         
+        
+        return ans;
     }
 }
