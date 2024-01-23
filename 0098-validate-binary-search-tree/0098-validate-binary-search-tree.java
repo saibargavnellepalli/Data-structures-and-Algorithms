@@ -15,27 +15,24 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-     List<Integer> list = new ArrayList<>();
-        
-        inorder(root, list);
-        
-        // kth smallest at (k-1) index in list
-        
-       for(int i=1; i<list.size(); i++){
-           if(list.get(i) <= list.get(i-1)) return false;
-       }
-        
-        return true;
+      List<Integer> li = new ArrayList<>();
+
+        inorder(root, li);  
+
+        for(int i = 1; i < li.size(); i++)
+        {
+            if(li.get(i) <= li.get(i - 1)){
+                return false;
+            }
+        }  
+        return true; 
     }
-    
-    public void inorder(TreeNode root, List<Integer> list){
-        
+    public void inorder(TreeNode root, List<Integer> li){
         if(root == null) return;
-        
-        // inorder -> left, root, right
-        inorder(root.left, list);
-        list.add(root.val);
-        inorder(root.right, list);
-        
-    }
+
+        inorder(root.left, li);
+        li.add(root.val);
+        inorder(root.right, li);
+    }   
+    
 }
