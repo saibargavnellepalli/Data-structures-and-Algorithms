@@ -14,27 +14,28 @@
  * }
  */
 class Solution {
-    boolean f = true;
-    
     public boolean isValidBST(TreeNode root) {
-        long prev[] = {Long.MIN_VALUE};
-        f(root,prev);
+     List<Integer> list = new ArrayList<>();
         
-        return f;
+        inorder(root, list);
+        
+        // kth smallest at (k-1) index in list
+        
+       for(int i=1; i<list.size(); i++){
+           if(list.get(i) <= list.get(i-1)) return false;
+       }
+        
+        return true;
     }
-    public void f(TreeNode root, long[] prev){
+    
+    public void inorder(TreeNode root, List<Integer> list){
         
-       if(root == null) return;
+        if(root == null) return;
         
-        f(root.left,prev);
+        // inorder -> left, root, right
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
         
-        if(root.val <= prev[0]){
-            f = false;
-            return;
-        }
-        
-        prev[0] = root.val;
-        
-        f(root.right,prev);
     }
 }
