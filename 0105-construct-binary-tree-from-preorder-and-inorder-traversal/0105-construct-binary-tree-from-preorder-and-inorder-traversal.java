@@ -1,37 +1,33 @@
 
 class Solution {
-     HashMap<Integer,Integer> map = new HashMap<>();
+    int ind=0;
+    
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         
-        int[] preInd = {0};
-        
-       
-        for(int i=0;i<inorder.length;i++)
-        map.put(inorder[i], i);
-        
-        return f(preorder, inorder, preInd, 0, inorder.length-1);
-        
+        return constructTree(preorder, inorder, 0, preorder.length-1);
     }
     
-    
-    
-    public TreeNode f(int[] preorder, int[] inorder, int[] preInd, int startInd, int endInd){
-           
-        if(preInd[0] >= preorder.length || startInd > endInd){
-            return null;
+    public TreeNode constructTree(int[] preorder, int[] inorder, int startInd, int endInd){
+        
+        if(ind >= preorder.length) return null;
+        if(startInd > endInd) return null;
+        
+        
+        int val = preorder[ind];
+        TreeNode node = new TreeNode(val);
+        ind++;
+        
+        int i=0;
+        for(i=startInd; i<=endInd; i++){
+            if(inorder[i] == val) break;
         }
         
         
-        int curVal = preorder[preInd[0]];
-        TreeNode root = new TreeNode(curVal);
-        preInd[0]+=1;
+        node.left = constructTree(preorder, inorder, startInd, i-1);
+        node.right = constructTree(preorder, inorder, i+1, endInd);
         
+        return node;
         
-        
-        root.left = f(preorder, inorder, preInd, startInd, map.get(curVal)-1);
-        root.right = f(preorder, inorder, preInd, map.get(curVal)+1, endInd);
-        
-        return root;
         
         
         
