@@ -1,11 +1,19 @@
 
 class Solution {
+     HashMap<Integer,Integer> map = new HashMap<>();
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         
         int[] preInd = {0};
+        
+       
+        for(int i=0;i<inorder.length;i++)
+        map.put(inorder[i], i);
+        
         return f(preorder, inorder, preInd, 0, inorder.length-1);
         
     }
+    
+    
     
     public TreeNode f(int[] preorder, int[] inorder, int[] preInd, int startInd, int endInd){
            
@@ -18,14 +26,10 @@ class Solution {
         TreeNode root = new TreeNode(curVal);
         preInd[0]+=1;
         
-        int i=-1;
         
-        for( i=startInd; i<=endInd; i++){
-            if(inorder[i] == curVal) break;
-        }
         
-        root.left = f(preorder, inorder, preInd, startInd, i-1);
-        root.right = f(preorder, inorder, preInd, i+1, endInd);
+        root.left = f(preorder, inorder, preInd, startInd, map.get(curVal)-1);
+        root.right = f(preorder, inorder, preInd, map.get(curVal)+1, endInd);
         
         return root;
         
