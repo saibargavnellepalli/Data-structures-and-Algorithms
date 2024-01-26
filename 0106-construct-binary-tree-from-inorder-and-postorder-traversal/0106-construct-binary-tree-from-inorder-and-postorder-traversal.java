@@ -1,40 +1,34 @@
 class Solution {
-     HashMap<Integer,Integer> map = new HashMap<>();
-    public TreeNode buildTree(int[] inorder, int[] preorder) {
-         int[] preInd = {preorder.length-1};
+     int ind=0;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
         
-       
-        for(int i=0;i<inorder.length;i++)
-        map.put(inorder[i], i);
-        
-        return f(preorder, inorder, preInd, 0, inorder.length-1);
-        
+        ind = postorder.length-1;
+    
+         return constructTree(postorder, inorder, 0, postorder.length-1);
     }
     
-    
-    
-    public TreeNode f(int[] preorder, int[] inorder, int[] preInd, int startInd, int endInd){
-           
-        if(preInd[0] < 0 || startInd > endInd){
-            return null;
+    public TreeNode constructTree(int[] postorder, int[] inorder, int startInd, int endInd){
+        
+        
+        if(startInd > endInd) return null;
+        
+        
+        int val = postorder[ind];
+        TreeNode node = new TreeNode(val);
+        ind--;
+        
+        int i=0;
+        for(i=startInd; i<=endInd; i++){
+            if(inorder[i] == val) break;
         }
         
         
-        int curVal = preorder[preInd[0]];
-        TreeNode root = new TreeNode(curVal);
-        preInd[0]-=1;
-        
-        
-        
+        node.right = constructTree(postorder, inorder, i+1, endInd);
+        node.left = constructTree(postorder, inorder, startInd, i-1);
        
-        root.right = f(preorder, inorder, preInd, map.get(curVal)+1, endInd);
-         root.left = f(preorder, inorder, preInd, startInd, map.get(curVal)-1);
         
-        return root;
+        return node;
         
         
-        
-        
-        
-    }
+  }
 }
