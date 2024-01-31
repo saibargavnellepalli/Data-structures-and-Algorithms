@@ -1,25 +1,28 @@
 class Solution {
-    public int minCostClimbingStairs(int[] arr) {
-      int fromZero = minCost(0,arr,arr.length,new HashMap<Integer,Integer>());
-      int  fromOne  = minCost(1,arr,arr.length,new HashMap<Integer,Integer>());
-          return Math.min(fromZero,fromOne);
+    public int minCostClimbingStairs(int[] cost) {
         
+        Integer dp1[] = new Integer[cost.length+1];
+        
+        int a =  f(0, cost.length, cost,dp1);
+        
+          Integer dp2[] = new Integer[cost.length+1];
+        int b =  f(1, cost.length, cost, dp2);
+        
+        return Math.min(a,b);
     }
-
-    public int minCost(int cc, int[] arr,int n,HashMap<Integer,Integer> memo){
-        if(cc==n)
-            return 0;
-        if(cc>n) return 1000;
+    
+    public int f(int cur, int tar, int[] cost, Integer dp[]){
         
-        if(memo.containsKey(cc))
-            return memo.get(cc);
+        if(cur == tar) return 0;
         
-        int a = arr[cc]+minCost(cc+1,arr,n,memo);
-        int b = arr[cc]+minCost(cc+2,arr,n,memo);
+        if(cur > tar) return 10000;
         
-        memo.put(cc,Math.min(a,b));
         
-        return Math.min(a, b);
+        if(dp[cur] != null) return dp[cur];
         
+        int one = cost[cur]+f(cur+1, tar, cost, dp);
+        int two = cost[cur]+f(cur+2, tar, cost, dp);
+        
+        return dp[cur] = Math.min(one, two);
     }
 }
