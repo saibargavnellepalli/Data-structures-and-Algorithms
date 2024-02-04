@@ -2,23 +2,8 @@ class Solution {
 public:
     bool isPalindrome(string s) {
         
-        string ans;
         
-        for(int i=0; i<s.length(); i++){
-            if(s[i] >= 'a' && s[i] <='z'){
-                ans.push_back(s[i]);
-            }
-            else  if(s[i] >= 'A' && s[i] <='Z'){
-                ans.push_back(tolower(s[i]));
-            }
-            if(s[i] >= '0' && s[i] <= '9'){
-                ans.push_back(s[i]);
-            }
-        }
-        
-        cout << ans;
-        return isPal(ans);
-        
+        return isPal(s);
     }
     
     bool isPal(string s){
@@ -26,7 +11,11 @@ public:
         int j=s.length()-1;
         
         while(i<=j){
-            if(s[i] != s[j]) return false;
+            
+            if(isalnum(s[i]) == false) {i++;continue;}
+            if(isalnum(s[j]) == false){ j--; continue;}
+            
+            if(tolower(s[i]) != tolower(s[j])) return false;
             i++;
             j--;
         }
