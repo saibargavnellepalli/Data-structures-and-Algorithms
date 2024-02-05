@@ -1,27 +1,33 @@
 class Solution {
     public int searchInsert(int[] nums, int target) {
-        int ans = 0;
         
-        int st=0,end=nums.length-1;
-      
-        while(st<=end){
-            int mid = (st+end)/2;
-            System.out.println(st+" "+mid+" "+end);
-            ans = mid;
+        //binary search 
+        int start=0, end=nums.length-1;
+        int insertPos = 0;
+        
+        while(start <= end){
             
-            if(nums[mid]==target) return mid;
+            int mid = (start+end)/2;
             
-            else if(nums[mid] < target){
-                st = mid + 1;
+             insertPos =  mid;
+            
+            if(nums[mid] == target) return mid;
+            
+            else if(target > nums[mid]) {
+                start = mid+1;
             }
-            else{
+            //left side
+            else if(target < nums[mid]){
                 end = mid-1;
             }
+            
         }
         
-        if(nums[ans] < target) return ans+1;
+        if(nums[insertPos] < target)  return insertPos+1;
         
-        
-        return ans;
-    }
+        return insertPos;
+            
+            
+        }
+    
 }
